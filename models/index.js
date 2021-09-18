@@ -3,6 +3,7 @@ const Product = require('./Product');
 const Category = require('./Category');
 const Tag = require('./Tag');
 const ProductTag = require('./ProductTag');
+const User = require('./User');
 
 ////////////////////////////////////////////////////////////
 // ASSOCIATIONS
@@ -35,4 +36,5 @@ module.exports = {
     Category,
     Tag,
     ProductTag,
+    User,
 };

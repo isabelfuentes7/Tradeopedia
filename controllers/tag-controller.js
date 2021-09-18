@@ -21,7 +21,7 @@ exports.getAllTags = catchAsync(async (req, res, next) => {
 // GET ONE CATEGORY
 ////////////////////////////////////////////////////////////
 
-// The `/api/categories/:id` endpoint
+// The `/api/tags/:id` endpoint
 exports.getOneTag = catchAsync(async (req, res, next) => {
   const tagsFindOne = await Tag.findOne({
     where: {
