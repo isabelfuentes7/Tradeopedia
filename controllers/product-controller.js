@@ -108,7 +108,6 @@ exports.putOneProduct = catchAsync(async (req, res, next) => {
     });
   // figure out which ones to remove
   const productTagsToRemove = associatedTag.filter(({ tag_id }) => !req.body.tagIds.includes(tag_id)).map(({ id }) => id);
-  console.log(productTagsToRemove);
 
   // run both actions
   const updatedProductTags = await Promise.all([ProductTag.destroy({ where: { id: productTagsToRemove } }), ProductTag.bulkCreate(newProductTags)]);
