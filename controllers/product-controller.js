@@ -57,7 +57,7 @@ exports.getOneProduct = catchAsync(async (req, res, next) => {
 ////////////////////////////////////////////////////////////
 // CREATE ONE PRODUCT
 ////////////////////////////////////////////////////////////
-
+// TODO Since we do not have MODEL TAGS + PRODUCT TAGS, this needs to be updated
 // createTagID's
 const bulkCreateTags = (productTagIds, productId) => {
   if (productTagIds.length) {
@@ -71,7 +71,7 @@ const bulkCreateTags = (productTagIds, productId) => {
     return ProductTag.bulkCreate(productTagIdArr);
   }
 };
-
+// TODO Since we do not have MODEL TAGS + PRODUCT TAGS, this needs to be updated
 exports.createOneProduct = catchAsync(async (req, res, next) => {
   const productsCreateOne = await Product.create(req.body);
   const productTagIds = req.body.tagIds;
@@ -88,7 +88,7 @@ exports.createOneProduct = catchAsync(async (req, res, next) => {
 ////////////////////////////////////////////////////////////
 // UPDATE ONE PRODUCT
 ////////////////////////////////////////////////////////////
-
+// TODO Since we do not have MODEL TAGS + PRODUCT TAGS, this needs to be updated
 exports.putOneProduct = catchAsync(async (req, res, next) => {
   const id = req.params.id;
   const bodyTagIds = req.body.tagIds;

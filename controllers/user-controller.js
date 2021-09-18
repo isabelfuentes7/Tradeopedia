@@ -24,20 +24,20 @@ exports.getOneUser = catchAsync(async (req, res, next) => {
     attributes: { exclude: ['password'] },
     where: { id },
     // TODO Incorporate models for when associations are finished
-    // include: [
-    //     {
-    //       model: Post,
-    //       attributes: ['id', 'title', 'post_content', 'created_at'],
-    //     },
-    //     {
-    //       model: Comment,
-    //       attributes: ['id', 'comment_text', 'created_at'],
-    //       include: {
-    //         model: Post,
-    //         attributes: ['title'],
-    //       },
-    //     },
-    //   ],
+    include: [
+      {
+        model: Product,
+        attributes: ['id', 'product_name', 'price', 'stock', 'category_id'],
+      },
+      //     {
+      //       model: Comment,
+      //       attributes: ['id', 'comment_text', 'created_at'],
+      //       include: {
+      //         model: Post,
+      //         attributes: ['title'],
+      //       },
+      //     },
+    ],
   });
 
   //   Error handler for when ID does not exist
