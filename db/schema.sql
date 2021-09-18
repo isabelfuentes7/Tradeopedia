@@ -1,3 +1,2 @@
-//named product_db which need to be created
-DROP DATABASE IF EXISTS product_db;
-CREATE DATABASE product_db;
+DROP DATABASE IF EXISTS techblog_db;
+CREATE DATABASE techblog_db;
