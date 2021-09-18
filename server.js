@@ -23,17 +23,17 @@ const PORT = process.env.PORT || 4001;
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 const sess = {
-  secret: 'abdullahsaint',
-  cookie: {
-    // Session will automatically expire in 10 minutes
-    expires: 10 * 60 * 1000,
-  },
-  resave: true,
-  rolling: true,
-  saveUninitialized: true,
-  store: new SequelizeStore({
-    db: sequelize,
-  }),
+    secret: 'abdullahsaint',
+    cookie: {
+        // Session will automatically expire in 10 minutes
+        expires: 10 * 60 * 1000,
+    },
+    resave: true,
+    rolling: true,
+    saveUninitialized: true,
+    store: new SequelizeStore({
+        db: sequelize,
+    }),
 };
 
 app.use(session(sess));
@@ -50,8 +50,8 @@ app.set('view engine', 'handlebars');
 /////////////////////////////////////////////
 
 app.use((req, res, next) => {
-  req.requestTime = new Date().toISOString();
-  next();
+    req.requestTime = new Date().toISOString();
+    next();
 });
 
 /////////////////////////////////////////////
@@ -60,5 +60,5 @@ app.use(routes);
 /////////////////////////////////////////////
 // turn on connection to db and server
 sequelize.sync({ force: false }).then(() => {
-  app.listen(PORT, () => console.log(`App listening at http://localhost:${PORT}`));
+    app.listen(PORT, () => console.log(`App listening at http://localhost:${PORT}`));
 });
