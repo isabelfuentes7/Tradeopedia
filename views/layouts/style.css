@@ -1,0 +1,70 @@
+#login-btn{
+    width: 45%;
+    color: white;
+    font-size: 20px;
+    border: 1px solid;
+    font-weight: 500;
+    text-align:center;
+    border-radius: 10px;
+    text-decoration: none;
+
+}
+#login-btn:hover{
+    color:white;
+    text-decoration: none;
+
+}
+#basket-btn{
+    width: 45%;
+    }
+
+#search-item{
+    width: 80%;
+    float: left;
+}
+#search-btn{
+    float: left;
+    background-color:rgb(102, 99, 99); 
+    color:white;
+}
+#search-zip-code{
+    float: left;
+    width: 50%;
+}
+#search-zip-code-btn{
+    float: left;
+    background-color:rgb(102, 99, 99); 
+    color:white;
+}
+.text-center{
+    text-align: center;
+    
+}
+.content-justify{
+    text-align: justify;
+}
+.navbar{
+    width: 100%;
+}
+.background-app{
+    background-color:rgb(102, 99, 99); 
+    color:white;
+}
+#login-btn:hover{
+    color:white;
+    text-decoration: none;
+
+}
+.nav-link{
+    color:white;
+    text-decoration: none;
+}
+.nav-link:hover{
+    color:white;
+    text-decoration: none;
+}
+
+.footer{
+    width: 100%;
+}
+
