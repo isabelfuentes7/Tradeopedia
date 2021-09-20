@@ -1,27 +1,26 @@
-// import models
 const Category = require('./Category');
-const Image = require('./Image');
-const Order = require('./Order');
 const Product = require('./Product');
 const User = require('./User');
+const Order = require('./Order');
 
 ////////////////////////////////////////////////////////////
-// ASSOCIATIONS
-
+// ASSOCIATIONS: CATEGORY TO PRODUCT
 ////////////////////////////////////////////////////////////
-// COMPLETE
+
+// Categories have many Products
+Category.hasMany(Product, {
+  foreignKey: 'category_id',
+});
+
 // Products belongsTo Category
 Product.belongsTo(Category, {
   foreignKey: 'category_id',
 });
 
-// // Categories have many Products
-Category.hasMany(Product, {
-  foreignKey: 'category_id',
-});
-
-// COMPLETE
 ////////////////////////////////////////////////////////////
+// ASSOCIATIONS: USER TO PRODUCT
+////////////////////////////////////////////////////////////
+
 // Users have many Posts
 User.hasMany(Product, {
   foreignKey: 'seller_id',
@@ -31,20 +30,11 @@ User.hasMany(Product, {
 Product.belongsTo(User, {
   foreignKey: 'seller_id',
 });
-// COMPLETE
-////////////////////////////////////////////////////////////
-// Users have many Posts
-Product.hasMany(Image, {
-  foreignKey: 'product_id',
-});
 
-// // Posts belongs to Users
-Image.belongsTo(Product, {
-  foreignKey: 'product_id',
-});
-
-// COMPLETE
 ////////////////////////////////////////////////////////////
+// ASSOCIATIONS: USER TO PRODUCT TO ORDER
+////////////////////////////////////////////////////////////
+
 Product.hasOne(Order, {
   foreignKey: 'product_id',
 });
@@ -61,8 +51,7 @@ User.hasMany(Order, {
 
 module.exports = {
   Category,
-  Image,
-  Order,
   Product,
   User,
+  Order,
 };

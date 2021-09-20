@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- BOOTSTRAP -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- CSS STYLING -->
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <!-- Boxicons CDN Link -->
+    <link href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css" rel="stylesheet" />
+    <title>Tradeopedia</title>
+  </head>
+  <body>
+    
+    <!-- HANDLEBARS ----------------------------------------------------------->
+    {{#if loggedIn}}
+    <!-- HANDLEBARS ----------------------------------------------------------->
+    
+    <!-- LOGGED IN ----------------------------------------------------------->
+    <!-- HEADER / NAVBAR -->
+    <header class="sidebar close">
+      <div>
+        <a href="/" class="logo-details">
+          <i class="bx bx-world"></i>
+          <span class="logo_name">Tradeopedia</span>
+        </a>
+      </div>
+      <nav>
+        <ul class="nav-links">
+          <!-- HOME ------------------------------------------------------>
+          <li>
+            <a href="/">
+              <i class="bx bx-home-smile bx-md"></i>
+              <span class="link_name">Home</span>
+            </a>
+            <ul class="sub-menu blank">
+              <li><a class="link_name" href="/">Home</a></li>
+            </ul>
+          </li>
+          <!-- DASHBOARD ------------------------------------------------------>
+          <li>
+            <a href="/dashboard">
+              <i class="bx bx-grid-alt bx-md"></i>
+              <span class="link_name">Dashboard</span>
+            </a>
+            <ul class="sub-menu blank">
+              <li><a class="link_name" href="#">Dashboard</a></li>
+            </ul>
+          </li>
+
+          <!-- CATEGORY ------------------------------------------------------>
+          <li>
+            <div class="icon-link">
+              <a href="#">
+                <i class="bx bx-collection bx-md"></i>
+                <span class="link_name">Category</span>
+              </a>
+              <i class="bx bxs-chevron-down arrow"></i>
+            </div>
+            <ul class="sub-menu">
+              <li><a class="link_name" href="#">Category</a></li>
+              <li><a href="#">Jewelry & Accessories</a></li>
+              <li><a href="#">Clothing & Shoes</a></li>
+              <li><a href="#">Home & Living</a></li>
+              <li><a href="#">Art & Collectibles</a></li>
+              <li><a href="#">Music</a></li>
+            </ul>
+          </li>
+
+          <!-- POSTS ------------------------------------------------------>
+          <li>
+            <div class="icon-link">
+              <a href="#">
+                <i class="bx bxs-id-card bx-md"></i>
+                <span class="link_name">Profile</span>
+              </a>
+              <i class="bx bxs-chevron-down arrow"></i>
+            </div>
+            <ul class="sub-menu">
+              <li><a class="link_name" href="#">Profile</a></li>
+              <li><a href="#">Products</a></li>
+              <li><a href="#">Orders</a></li>
+              <li><a href="#">Messages</a></li>
+            </ul>
+          </li>
+
+          <!-- SETTINGS ------------------------------------------------------>
+          <li>
+            <a href="#">
+              <i class="bx bx-cog bx-md"></i>
+              <span class="link_name">Setting</span>
+            </a>
+            <ul class="sub-menu blank">
+              <li><a class="link_name" href="#">Setting</a></li>
+            </ul>
+          </li>
+
+          <!-- PROFILE ------------------------------------------------------>
+          <li>
+            <div class="profile-details">
+              <div class="profile-content">
+                <img src="/img/profile-gallery/Avatar-Mehdi-200x200.jpg" alt="profileImg" />
+              </div>
+              <div class="name-welcome">
+                <div class="profile_name">{{username}}</div>
+                <div class="welcome-msg">Welcome back!</div>
+              </div>
+              <i id="logout-button" class="bx bx-log-out bx-md"></i>
+            </div>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+<!-- HANDLEBARS ----------------------------------------------------------->
+    {{else}}
+<!-- HANDLEBARS ----------------------------------------------------------->
+
+<!-- NOT LOGGED IN ----------------------------------------------------------->
+<!-- HEADER / NAVBAR -->
+    <header class="sidebar close">
+      <div>
+        <a href="/" class="logo-details">
+          <i class="bx bx-world"></i>
+          <span class="logo_name">Tradeopedia</span>
+        </a>
+      </div>
+      <nav>
+        <ul class="nav-links">
+          <!-- HOME ------------------------------------------------------>
+          <li>
+            <a href="/">
+              <i class="bx bx-home-smile bx-md"></i>
+              <span class="link_name">Home</span>
+            </a>
+            <ul class="sub-menu blank">
+              <li><a class="link_name" href="#">Home</a></li>
+            </ul>
+          </li>
+          <!-- CATEGORY ------------------------------------------------------>
+          <li>
+            <div class="icon-link">
+              <a href="#">
+                <i class="bx bx-collection bx-md"></i>
+                <span class="link_name">Category</span>
+              </a>
+              <i class="bx bxs-chevron-down arrow"></i>
+            </div>
+            <ul class="sub-menu">
+              <li><a class="link_name" href="#">Category</a></li>
+              <li><a href="#">Jewelry & Accessories</a></li>
+              <li><a href="#">Clothing & Shoes</a></li>
+              <li><a href="#">Home & Living</a></li>
+              <li><a href="#">Art & Collectibles</a></li>
+              <li><a href="#">Music</a></li>
+            </ul>
+          </li>
+
+          <!-- LOGIN ------------------------------------------------------>
+          <li>
+            <a href="/login">
+              <i class='bx bx-log-in bx-md'></i>
+              <span class="link_name">Login</span>
+            </a>
+            <ul class="sub-menu blank">
+              <li><a class="link_name" href="#">Login</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+<!-- HANDLEBARS ----------------------------------------------------------->
+    {{/if}}
+<!-- HANDLEBARS ----------------------------------------------------------->
+
+<!-- MAIN ----------------------------------------------------------->
+
+    <main class="main-section">
+      <div class="home-content main-content">
+        <i class="bx bx-menu"></i>
+      </div>
+      {{{ body }}}
+    </main>
+    <!--------------------------------------------------------------->
+    <!-- SCRIPTS -->
+    <!--------------------------------------------------------------->
+    
+    <script src="/javascript/navigation.js"></script>
+    {{#if loggedIn}}
+    <script src="/javascript/logout.js"></script>
+    {{/if}}
+  </body>
+</html>

@@ -3,13 +3,12 @@ const apiRoutes = require('./api');
 const AppError = require('../utils/appError');
 const globalErrorHandler = require('../controllers/errorController');
 
-// TODO ONCE FRONTEND + LOGIN HAS BEEN CREATED
-// const homeRoutes = require('./homeRoutes.js');
-// const dashboardRoutes = require('./dashboardRoutes.js');
-// router.use('/', homeRoutes);
-// router.use('/dashboard', dashboardRoutes);
+const homeRoutes = require('./home-routes.js');
+const dashboardRoutes = require('./dashboard-routes.js');
 
 router.use('/api', apiRoutes);
+router.use('/', homeRoutes);
+router.use('/dashboard', dashboardRoutes);
 
 // MIDDLEWARE: UNHANDLED ROUTES
 router.all('*', (req, res, next) => {
