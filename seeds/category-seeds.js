@@ -11,13 +11,10 @@ const categoryData = [
     category_name: 'Home & Living',
   },
   {
-    category_name: 'Toys & Crafts',
+    category_name: 'Toys & Entertainment',
   },
   {
-    category_name: 'Art & Music',
-  },
-  {
-    category_name: 'Others',
+    category_name: 'Art & Collectibles',
   },
 ];
 

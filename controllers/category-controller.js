@@ -11,7 +11,7 @@ exports.getAllCategories = catchAsync(async (req, res, next) => {
   const categoriesFindAll = await Category.findAll({
     include: {
       model: Product,
-      attributes: ['product_name'],
+      attributes: ['id', 'product_name', 'price', 'category_id'],
     },
   });
 
@@ -24,13 +24,13 @@ exports.getAllCategories = catchAsync(async (req, res, next) => {
 
 // The `/api/categories/:id` endpoint
 exports.getOneCategory = catchAsync(async (req, res, next) => {
+  const id = req.params.id;
+
   const categoriesFindOne = await Category.findOne({
-    where: {
-      id: req.params.id,
-    },
+    where: { id },
     include: {
       model: Product,
-      attributes: ['category_id'],
+      attributes: ['id', 'product_name', 'price', 'category_id'],
     },
   });
 
@@ -48,10 +48,8 @@ exports.getOneCategory = catchAsync(async (req, res, next) => {
 
 // The `/api/categories/` endpoint
 exports.postOneCategory = catchAsync(async (req, res, next) => {
-  const categoriesCreateOne = await Category.create({
-    category_name: req.body.category_name,
-  });
-
+  const category_name = req.body.category_name;
+  const categoriesCreateOne = await Category.create({ category_name });
   res.status(200).json(categoriesCreateOne);
 });
 
@@ -61,14 +59,13 @@ exports.postOneCategory = catchAsync(async (req, res, next) => {
 
 // The `/api/categories/:id` endpoint
 exports.putOneCategory = catchAsync(async (req, res, next) => {
+  const id = req.params.id;
+  const category_name = req.body.category_name;
+
   const categoriesUpdateOne = await Category.update(
+    { category_name },
     {
-      category_name: req.body.category_name,
-    },
-    {
-      where: {
-        id: req.params.id,
-      },
+      where: { id },
     }
   );
 
@@ -86,15 +83,19 @@ exports.putOneCategory = catchAsync(async (req, res, next) => {
 
 // The `/api/categories/:id` endpoint
 exports.deleteOneCategory = catchAsync(async (req, res, next) => {
+  const id = req.params.id;
+
   const categoriesFindOne = await Category.findOne({
-    where: { id: req.params.id },
-    include: [Product],
+    where: { id },
+    include: {
+      model: Product,
+    },
   });
 
-  categoriesFindOne.products.forEach((comment) => {
+  categoriesFindOne.products.forEach((products) => {
     products.destroy();
   });
 
   categoriesFindOne.destroy();
-  res.end();
+  res.status(200).json(categoriesFindOne);
 });

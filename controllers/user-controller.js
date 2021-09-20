@@ -1,4 +1,4 @@
-const { User } = require('../models');
+const { User, Product, Order } = require('../models');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 
@@ -15,98 +15,93 @@ exports.getAllUsers = catchAsync(async (req, res, next) => {
 });
 
 ////////////////////////////////////////////////////////////
-// GET ONE CATEGORY
+// GET ONE USER
 ////////////////////////////////////////////////////////////
-
 // The `/api/users/:id` endpoint
-exports.getOneUser = catchAsync(async (req, res, next) => {
-  const userFindOne = await User.findOne({
+exports.getOneUsers = catchAsync(async (req, res, next) => {
+  const id = req.params.id;
+  const usersFindOne = await User.findOne({
     attributes: { exclude: ['password'] },
     where: { id },
-    // TODO Incorporate models for when associations are finished
-    // include: [
-    //     {
-    //       model: Post,
-    //       attributes: ['id', 'title', 'post_content', 'created_at'],
-    //     },
-    //     {
-    //       model: Comment,
-    //       attributes: ['id', 'comment_text', 'created_at'],
-    //       include: {
-    //         model: Post,
-    //         attributes: ['title'],
-    //       },
-    //     },
-    //   ],
+    include: [
+      {
+        model: Product,
+      },
+      {
+        model: Order,
+        attributes: { exclude: ['buyer_id', ''] },
+        include: [
+          {
+            model: Product,
+            include: [
+              {
+                model: User,
+                attributes: { exclude: ['password'] },
+              },
+            ],
+          },
+        ],
+      },
+    ],
   });
 
-  //   Error handler for when ID does not exist
-  if (!userFindOne) {
+  // Error handler for when ID does not exist
+  if (!usersFindOne) {
     return next(new AppError('No User found with that ID', 404));
   }
 
-  res.status(200).json(userFindOne);
+  res.status(200).json(usersFindOne);
 });
 
 ////////////////////////////////////////////////////////////
 // CREATE USER
 ////////////////////////////////////////////////////////////
-
-// The `/api/users/:id` endpoint
+// The `/api/users/` endpoint
 exports.postOneUser = catchAsync(async (req, res, next) => {
-  const id = req.params.id;
-  const { username, email, password } = req.body;
-  const createOneUser = await User.create({ username, email, password });
-
-  createOneUser.id = id;
+  const createOneUser = await User.create(req.body);
 
   await req.session.save(() => {
     req.session.user_id = createOneUser.id;
     req.session.username = createOneUser.username;
     req.session.loggedIn = true;
   });
+
   res.status(201).json(createOneUser);
 });
 
 ////////////////////////////////////////////////////////////
-// UPDATE ONE USER
-////////////////////////////////////////////////////////////
-
-// TODO create update password
-
-////////////////////////////////////////////////////////////
 // LOGIN USER
 ////////////////////////////////////////////////////////////
-
+// The `/api/users/login` endpoint
 exports.loginUser = catchAsync(async (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
-  const userFindOne = await User.findOne({ where: { email } });
+  const dbUserData = await User.findOne({ where: { email } });
 
   // Error handler for when ID does not exist
-  if (!userFindOne) {
+  if (!dbUserData) {
     return next(new AppError('No User found with that Email', 404));
   }
 
-  const validPassword = userFindOne.checkPassword(password);
+  const validatePassword = dbUserData.checkPassword(password);
 
-  if (!validPassword) {
+  if (!validatePassword) {
     return next(new AppError('Invalid Password', 404));
   }
 
   req.session.save(() => {
     // declare session variables
-    req.session.user_id = userFindOne.id;
-    req.session.username = userFindOne.username;
+    req.session.user_id = dbUserData.id;
+    req.session.username = dbUserData.username;
     req.session.loggedIn = true;
-    res.status(200).json({ user: userFindOne, message: 'You are now logged in!' });
+    res.status(200).json({ user: dbUserData, message: 'You are now logged in!' });
   });
 });
 
 ////////////////////////////////////////////////////////////
 // LOGOUT USER
 ////////////////////////////////////////////////////////////
-
+// The `/api/users/logout` endpoint
 exports.logoutUser = catchAsync(async (req, res, next) => {
   if (req.session.loggedIn) {
     req.session.destroy(() => {
