@@ -9,22 +9,22 @@ const AppError = require('../utils/appError');
 // The `/api/products` endpoint
 exports.getAllProducts = catchAsync(async (req, res, next) => {
   // find all products
-  const productsFindAll = await Product.findAll({
-    include: [
-      {
-        model: Category,
-        attributes: ['category_name'],
-      },
-      {
-        model: User,
-        attributes: { exclude: ['password', 'id'] },
-      },
-    ],
-  });
+  // const productsFindAll = await Product.findAll({
+  //   include: [
+  //     {
+  //       model: Category,
+  //       attributes: ['category_name'],
+  //     },
+  //     {
+  //       model: User,
+  //       attributes: { exclude: ['password', 'id'] },
+  //     },
+  //   ],
+  // });
 
-  const productsAll = productsFindAll.map((product) => product.get({ plain: true }));
-
-  res.render('homepage', { productsAll, loggedIn: req.session.loggedIn });
+  // const productsAll = productsFindAll.map((product) => product.get({ plain: true }));
+  // res.render('homepage', { productsAll, loggedIn: req.session.loggedIn });
+  res.render('homepage', { loggedIn: req.session.loggedIn });
 });
 
 ////////////////////////////////////////////////////////////

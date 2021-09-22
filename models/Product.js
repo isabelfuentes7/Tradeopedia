@@ -20,12 +20,23 @@ Product.init(
       type: DataTypes.STRING(30),
       allowNull: false,
     },
-    price: {
+    product_price: {
       type: DataTypes.DECIMAL(15, 2),
       allowNull: false,
       validate: {
         isDecimal: true,
       },
+    },
+    product_description: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [1],
+      },
+    },
+    category_name: {
+      type: DataTypes.STRING(30),
+      allowNull: false,
     },
     category_id: {
       type: DataTypes.INTEGER,

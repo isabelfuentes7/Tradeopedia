@@ -12,10 +12,6 @@ exports.getAllProducts = catchAsync(async (req, res, next) => {
   const productsFindAll = await Product.findAll({
     include: [
       {
-        model: Category,
-        attributes: ['category_name'],
-      },
-      {
         model: User,
         attributes: { exclude: ['password', 'id'] },
       },
@@ -35,10 +31,6 @@ exports.getOneProduct = catchAsync(async (req, res, next) => {
   const productsFindOne = await Product.findOne({
     where: { id },
     include: [
-      {
-        model: Category,
-        attributes: ['category_name'],
-      },
       {
         model: User,
         attributes: { exclude: ['password', 'id'] },
