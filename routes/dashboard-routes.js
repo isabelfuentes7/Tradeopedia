@@ -10,4 +10,6 @@ router.get('/create/', withAuth, dashboardControls.getOneUsersCreate);
 
 router.post('/create/', withAuth, dashboardControls.createOneProduct);
 
+router.get('/messages/', withAuth, dashboardControls.getMessages);
+
 module.exports = router;

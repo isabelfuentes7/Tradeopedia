@@ -1,4 +1,4 @@
-const { User, Product, Order, Category } = require('../models');
+const { User, Product, Order, Category, Image } = require('../models');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 const helper = require('../utils/helpers');
@@ -16,8 +16,32 @@ exports.getUserProfile = catchAsync(async (req, res, next) => {
     where: { id },
   });
 
+  // find all products
+  const imagesFindAll = await Image.findAll({
+    raw: true,
+    include: [
+      {
+        model: Product,
+        include: [
+          {
+            model: User,
+            attributes: { exclude: ['password'] },
+          },
+        ],
+      },
+    ],
+  });
+
+  // Create a unique array of the first image for each product id
+  const filteredImageArr = helper.uniqueArray(imagesFindAll, 'product_id');
+
+  // Create separate arrays for each column of the home page
+  const gallery1 = (arr, nth) => arr.filter((e, i) => i % nth === nth - 3);
+  const gallery2 = (arr, nth) => arr.filter((e, i) => i % nth === nth - 2);
+  const gallery3 = (arr, nth) => arr.filter((e, i) => i % nth === nth - 1);
+
   // render dashboard page and use the user first name for welcome message
-  res.render('dashboard', { loggedIn: true, user: usersFindOne.dataValues });
+  res.render('dashboard', { loggedIn: true, user: usersFindOne.dataValues, gallery_1: gallery1(filteredImageArr, 3), gallery_2: gallery2(filteredImageArr, 3), gallery_3: gallery3(filteredImageArr, 3) });
 });
 
 ////////////////////////////////////////////////////////////
@@ -25,7 +49,16 @@ exports.getUserProfile = catchAsync(async (req, res, next) => {
 ////////////////////////////////////////////////////////////
 // The `/dashboard/products/` endpoint
 exports.getOneUsersProducts = catchAsync(async (req, res, next) => {
-  res.render('userProducts');
+  const id = req.session.user_id;
+
+  // find one user with id
+  const usersFindOne = await User.findOne({
+    raw: true,
+    attributes: { exclude: ['password'] },
+    where: { id },
+  });
+
+  res.render('userProducts', { loggedIn: true, user: usersFindOne });
 });
 
 ////////////////////////////////////////////////////////////
@@ -72,4 +105,12 @@ exports.createOneProduct = catchAsync(async (req, res, next) => {
 
   const productsCreateOne = await Product.create(newProduct);
   res.status(201).json(productsCreateOne);
+});
+
+////////////////////////////////////////////////////////////
+// CREATE ONE PRODUCT
+////////////////////////////////////////////////////////////
+
+exports.getMessages = catchAsync(async (req, res, next) => {
+  res.render('userMessages', { loggedIn: true });
 });

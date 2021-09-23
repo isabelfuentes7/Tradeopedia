@@ -18,4 +18,18 @@ module.exports = {
 
     return word;
   },
+
+  uniqueArray: (array, type) => {
+    const filteredArr = array.reduce((acc, current) => {
+      const x = acc.find((item) => item[type] === current[type]);
+
+      if (!x) {
+        return acc.concat([current]);
+      } else {
+        return acc;
+      }
+    }, []);
+
+    return filteredArr;
+  },
 };
