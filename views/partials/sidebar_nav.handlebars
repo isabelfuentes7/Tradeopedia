@@ -14,7 +14,7 @@
               <span class="link_name">Explore</span>
             </a>
             <ul class="sub-menu blank">
-              <li><a class="link_name" href="#">Explore</a></li>
+              <li><a class="link_name" href="/dashboard">Explore</a></li>
             </ul>
           </li>
           <!-- PRODUCTS ------------------------------------------------------>
@@ -25,7 +25,7 @@
               <span class="link_name">Products</span>
             </a>
             <ul class="sub-menu blank">
-              <li><a class="link_name" href="#">Products</a></li>
+              <li><a class="link_name" href="/dashboard/products/">Products</a></li>
             </ul>
           </li>
 
@@ -36,7 +36,7 @@
               <span class="link_name">Create</span>
             </a>
             <ul class="sub-menu blank">
-              <li><a class="link_name" href="#">Create</a></li>
+              <li><a class="link_name" href="/dashboard/create/">Create</a></li>
             </ul>
           </li>
 
@@ -47,18 +47,26 @@
               <span class="link_name">Messages</span>
             </a>
             <ul class="sub-menu blank">
-              <li><a class="link_name" href="#">Messages</a></li>
+              <li><a class="link_name" href="/dashboard/messages/">Messages</a></li>
             </ul>
           </li>
 
-
-
+          <!-- Profile Page ------------------------------------------------------>
+          <li>
+            <a href="/dashboard/profile/">
+              <i class="bx bx-id-card bx-md"></i>
+              <span class="link_name">Profile</span>
+            </a>
+            <ul class="sub-menu blank">
+              <li><a class="link_name" href="/dashboard/profile/">Profile</a></li>
+            </ul>
+          </li>
 
           <!-- PROFILE ------------------------------------------------------>
           <li>
             <div class="profile-details">
               <div class="profile-content">
-                <img src="/img/profile_img/Avatar-Mehdi-200x200.jpg" alt="profileImg" />
+                <img src="/img/profile/{{user.profile_img_url}}" alt="profileImg" />
               </div>
               <div class="name-welcome">
                 <div class="profile_name">{{user.first_name}}</div>

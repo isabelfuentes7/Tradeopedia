@@ -15,16 +15,15 @@ Image.init(
       allowNull: false,
       autoIncrement: true,
     },
-    image_name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
     product_id: {
       type: DataTypes.INTEGER,
       references: {
         model: 'product',
         key: 'id',
       },
+    },
+    product_img_url: {
+      type: DataTypes.STRING,
     },
   },
   {

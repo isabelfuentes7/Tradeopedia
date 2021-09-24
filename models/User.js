@@ -56,6 +56,10 @@ User.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    profile_img_url: {
+      type: DataTypes.STRING,
+      defaultValue: 'default.jpg',
+    },
   },
   {
     hooks: {

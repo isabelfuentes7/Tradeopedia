@@ -1,7 +1,44 @@
+const multer = require('multer');
 const { User, Product, Order, Category, Image } = require('../models');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 const helper = require('../utils/helpers');
+
+////////////////////////////////////////////////////////////
+// Multer Middleware
+////////////////////////////////////////////////////////////
+// [1] multerStorage specifies where file should be saved and with what name
+const multerStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'public/img/profile');
+  },
+  filename: (req, file, cb) => {
+    // File Name Structure
+    // userId-imageName-timestamp.jpeg
+    const ext = file.mimetype.split('/')[1];
+    const item_name = file.originalname.split('.')[0];
+    cb(null, `user-${req.session.user_id}-${item_name}-${Date.now()}.${ext}`);
+  },
+});
+
+// [2] multerFilter checks whether the file uploaded is an Image
+const multerFilter = (req, file, cb) => {
+  if (file.mimetype.startsWith('image')) {
+    cb(null, true);
+  } else {
+    cb(new AppError('Not an Image! Please upload only images.', 400), false);
+  }
+};
+
+// [3] upload will finalize the file to be uploaded to the directory
+const upload = multer({
+  storage: multerStorage,
+  fileFilter: multerFilter,
+});
+
+// [4] Function to initiate the upload process
+exports.uploadUserPhoto = upload.single('profile_img_url');
+////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////
 // GET ONE USER
@@ -108,9 +145,72 @@ exports.createOneProduct = catchAsync(async (req, res, next) => {
 });
 
 ////////////////////////////////////////////////////////////
-// CREATE ONE PRODUCT
+// SHOW USER MESSAGES TAB
 ////////////////////////////////////////////////////////////
 
 exports.getMessages = catchAsync(async (req, res, next) => {
-  res.render('userMessages', { loggedIn: true });
+  const id = req.session.user_id;
+
+  // find one user with id
+  const usersFindOne = await User.findOne({
+    raw: true,
+    attributes: { exclude: ['password'] },
+    where: { id },
+  });
+
+  res.render('userMessages', { loggedIn: true, user: usersFindOne });
+});
+
+////////////////////////////////////////////////////////////
+// UPLOAD IMAGE
+////////////////////////////////////////////////////////////
+
+exports.uploadImage = catchAsync(async (req, res, next) => {
+  console.log(req.file);
+
+  res.status(201).json({
+    message: 'success',
+    data: req.file,
+  });
+});
+
+////////////////////////////////////////////////////////////
+// SHOW USER PROFILE PAGE
+////////////////////////////////////////////////////////////
+
+exports.userProfile = catchAsync(async (req, res, next) => {
+  const id = req.session.user_id;
+
+  // find one user with id
+  const usersFindOne = await User.findOne({
+    raw: true,
+    attributes: { exclude: ['password'] },
+    where: { id },
+  });
+
+  res.render('userProfile', { loggedIn: true, user: usersFindOne });
+});
+
+////////////////////////////////////////////////////////////
+// UPDATE USE PROFILE IMAGE
+////////////////////////////////////////////////////////////
+
+exports.updateUserImage = catchAsync(async (req, res, next) => {
+  const id = req.session.user_id;
+  const profile_img_url = req.file.filename;
+
+  console.log();
+
+  // update user profile
+  await User.update(
+    { profile_img_url },
+    {
+      where: { id },
+    }
+  );
+
+  res.status(201).json({
+    message: 'success',
+    data: profile_img_url,
+  });
 });

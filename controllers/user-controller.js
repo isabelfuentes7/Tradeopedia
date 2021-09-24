@@ -111,3 +111,15 @@ exports.logoutUser = catchAsync(async (req, res, next) => {
     res.status(404).end();
   }
 });
+
+////////////////////////////////////////////////////////////
+// PASSWORD UPDATE
+////////////////////////////////////////////////////////////
+
+exports.updatePassword = catchAsync(async (req, res, next) => {
+  console.log(req.file);
+  console.log(req.body);
+  if (req.body.password) {
+    return next(new AppError('This route is not for password updates. Please use /update/password.', 400));
+  }
+});
