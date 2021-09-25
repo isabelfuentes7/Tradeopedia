@@ -113,7 +113,7 @@ exports.getAllProducts = catchAsync(async (req, res, next) => {
 // GO TO LOGIN PAGE
 ////////////////////////////////////////////////////////////
 exports.loginPage = catchAsync(async (req, res, next) => {
-  if (!req.session.loggedIn) {
+  if (req.session.loggedIn) {
     res.redirect('/');
     return;
   }
@@ -126,7 +126,7 @@ exports.loginPage = catchAsync(async (req, res, next) => {
 ////////////////////////////////////////////////////////////
 
 exports.signUpPage = catchAsync(async (req, res, next) => {
-  if (!req.session.loggedIn) {
+  if (req.session.loggedIn) {
     res.redirect('/');
     return;
   }
