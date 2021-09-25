@@ -4,11 +4,20 @@ const AppError = require('../utils/appError');
 const globalErrorHandler = require('../controllers/errorController');
 
 const homeRoutes = require('./home-routes.js');
-const dashboardRoutes = require('./dashboard-routes.js');
+const viewRoutes = require('./view-routes.js');
+const updateRoutes = require('./update-routes.js');
+const createRoutes = require('./create-routes.js');
 
+//////////////////////////////////////////////////////////////////////
 router.use('/api', apiRoutes);
+//////////////////////////////////////////////////////////////////////
 router.use('/', homeRoutes);
-router.use('/dashboard', dashboardRoutes);
+router.use('/home', homeRoutes);
+router.use('/view', viewRoutes);
+router.use('/update', updateRoutes);
+router.use('/create', createRoutes);
+
+//////////////////////////////////////////////////////////////////////
 
 // MIDDLEWARE: UNHANDLED ROUTES
 router.all('*', (req, res, next) => {

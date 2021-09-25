@@ -3,12 +3,12 @@
 ///////////////////////////////////////////////////////////////
 
 // Click event for portfolio images
-$('.item-image').click(function () {
-  // Traversing back to parent element and moving down to the second div where the modal id can be targeted
-  var model_item_id = $(this).parents().children('div')[1].id;
+$('.item-image').click(function (event) {
+  // split the image id and number determines the model-#
+  var model_item_id = event.target.id.split('-')[1];
 
-  // // To Open Modal Window
-  var myModal = new bootstrap.Modal($(String(`#${model_item_id}`)), {});
+  // To Open Modal Window
+  var myModal = new bootstrap.Modal($(String(`#model-${model_item_id}`)), {});
   myModal.show();
 
   // FOR REDIRECTING USER

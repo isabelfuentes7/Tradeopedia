@@ -12,7 +12,7 @@ const profile_img_url = document.querySelector('#profile_img_url');
 // UPDATE USER PROFILE
 /////////////////////////////////////////////////////////////////
 
-if (window.location.pathname === '/dashboard/profile/') {
+if (window.location.pathname === '/view/user/profile/') {
   profile_img_url.addEventListener('change', function () {
     const form = new FormData();
     form.append('profile_img_url', document.querySelector('#profile_img_url').files[0]);
@@ -25,10 +25,10 @@ if (window.location.pathname === '/dashboard/profile/') {
         body: form,
       };
 
-      const response = await fetch('/dashboard/profile/', options);
+      const response = await fetch('/update/profile', options);
 
       if (response.ok) {
-        document.location.replace('/dashboard/profile/');
+        document.location.replace('/view/user/profile/');
       } else if (!response.ok) {
         console.log(await response.json());
       }

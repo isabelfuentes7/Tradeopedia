@@ -268,8 +268,6 @@
   font-weight: 600;
 }
 
-/* MAIN SECTION -------------------------------------------- */
-
 .nav-link {
   text-align: center;
 }
@@ -287,6 +285,15 @@
 #login-form {
   border-top-left-radius: 0rem;
   border-top-right-radius: 0rem;
+}
+
+.product_description {
+  /* To preserve white space  */
+  white-space: pre-line;
+}
+
+.modal-header {
+  text-align: center;
 }
 
 /* MEDIA QUERRIES -----------------------------------------------*/

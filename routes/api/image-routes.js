@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const withAuth = require('../../utils/auth');
-const imageControls = require('../../controllers/image-controller');
+const imageControls = require('../../controllers/api-image-controller');
 
 ////////////////////////////////////////////////////////////
 

@@ -49,7 +49,7 @@ const getAllUsers = async () => {
     method: 'GET',
     headers: { 'Content-Type': 'application/json' },
   };
-  const response = await fetch('/api/users', options);
+  const response = await fetch('/home/users/all/', options);
   const data = await response.json();
   return data;
 };
@@ -63,7 +63,7 @@ const createUser = async (first_name, last_name, username, email, password, coun
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ first_name, last_name, username, email, password, country, state, city }),
   };
-  const response = await fetch('/api/users', options);
+  const response = await fetch('/home/users/create/', options);
 
   if (response.ok) {
     loginUser(email, password);
@@ -81,10 +81,10 @@ const loginUser = async (email, password, username) => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email, password }),
   };
-  const response = await fetch('/api/users/login', options);
+  const response = await fetch('/home/users/login/', options);
 
   if (response.ok) {
-    document.location.replace('/dashboard');
+    document.location.replace('/view/user/dashboard/');
   } else {
     showMessage('login', 'Password Incorrect');
   }
@@ -101,7 +101,7 @@ const logoutUser = async (event) => {
     headers: { 'Content-Type': 'application/json' },
   };
 
-  const response = await fetch('/api/users/logout', options);
+  const response = await fetch('/home/users/logout/', options);
 
   if (response.ok) {
     document.location.replace('/');
