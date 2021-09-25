@@ -5,12 +5,17 @@
 /////////////////////////////////////////////////////////////////
 
 // SignUp
+const build_store_btn = document.querySelector('#build-store-button');
 const signupBtn = document.querySelector('#signup-button');
 const userSignupCheck = document.querySelector('.signup-check');
 
 // Login
+const login_btn = document.querySelector('#login-button');
 const signInBtn = document.querySelector('#signin-button');
 const userLoginCheck = document.querySelector('.login-check');
+
+// Logout
+const logout_btn = document.querySelector('#logout-button');
 
 /////////////////////////////////////////////////////////////////
 // TIMEOUT MESSAGE
@@ -44,7 +49,7 @@ const getAllUsers = async () => {
     method: 'GET',
     headers: { 'Content-Type': 'application/json' },
   };
-  const response = await fetch('/api/users', options);
+  const response = await fetch('/home/users/all/', options);
   const data = await response.json();
   return data;
 };
@@ -52,13 +57,13 @@ const getAllUsers = async () => {
 /////////////////////////////////////////////////////////////////
 // CREATE USER
 /////////////////////////////////////////////////////////////////
-const createUser = async (username, email, password) => {
+const createUser = async (first_name, last_name, username, email, password, country, state, city) => {
   const options = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ username, email, password }),
+    body: JSON.stringify({ first_name, last_name, username, email, password, country, state, city }),
   };
-  const response = await fetch('/api/users', options);
+  const response = await fetch('/home/users/create/', options);
 
   if (response.ok) {
     loginUser(email, password);
@@ -76,12 +81,32 @@ const loginUser = async (email, password, username) => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email, password }),
   };
-  const response = await fetch('/api/users/login', options);
+  const response = await fetch('/home/users/login/', options);
 
   if (response.ok) {
-    document.location.replace('/dashboard');
+    document.location.replace('/view/user/dashboard/');
   } else {
     showMessage('login', 'Password Incorrect');
+  }
+};
+
+/////////////////////////////////////////////////////////////////
+// FETCH | POST | LOGOUT
+/////////////////////////////////////////////////////////////////
+
+const logoutUser = async (event) => {
+  event.preventDefault();
+  const options = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+  };
+
+  const response = await fetch('/home/users/logout/', options);
+
+  if (response.ok) {
+    document.location.replace('/');
+  } else {
+    alert(response.statusText);
   }
 };
 
@@ -91,15 +116,20 @@ const loginUser = async (email, password, username) => {
 
 const signupFormHandler = async (event) => {
   event.preventDefault();
-  const email = document.querySelector('#signup-email').value.trim();
+  const first_name = document.querySelector('#signup-first-name').value.trim();
+  const last_name = document.querySelector('#signup-last-name').value.trim();
   const username = document.querySelector('#signup-username').value.trim();
+  const email = document.querySelector('#signup-email').value.trim();
   const password = document.querySelector('#signup-password').value.trim();
+  const country = document.querySelector('#signup_country').value;
+  const state = document.querySelector('#signup_state').value;
+  const city = document.querySelector('#signup_city').value;
 
   const findAllUsers = await getAllUsers();
   const checkEmail = await findAllUsers.find((el) => el.email === email);
   const checkUsername = await findAllUsers.find((el) => el.username === username);
 
-  if (email === '' || username === '' || password === '') {
+  if (first_name === '' || last_name === '' || email === '' || username === '' || password === '' || country === '' || state === '' || city === '') {
     // [1] CHECK ALL FIELDS ARE POPULATED
     showMessage('signup', 'Please fill out all fields.');
   } else if (!checkEmail && checkUsername) {
@@ -113,7 +143,7 @@ const signupFormHandler = async (event) => {
     showMessage('signup', `Email ${email} & Username ${username} already exist.`);
   } else {
     // [5] CREATE USER AND LOG THEM IN
-    await createUser(username, email, password);
+    await createUser(first_name, last_name, username, email, password, country, state, city);
   }
 };
 
@@ -128,8 +158,8 @@ const loginFormHandler = async (event) => {
 
   // [1] CHECK EMAIL EXISTS
   const findAllUsers = await getAllUsers();
-  const checkUserExists = findAllUsers.find((el) => el.email === email);
 
+  const checkUserExists = findAllUsers.find((el) => el.email === email);
   // [2] ATTEMPT TO LOG USER IN
   if (email === '' || password === '') {
     // [3] CHECK ALL FIELDS ARE POPULATED
@@ -147,14 +177,15 @@ const loginFormHandler = async (event) => {
 // EVENT LISTENERS
 /////////////////////////////////////////////////////////////////
 
-if (window.location.pathname === '/login') {
+if (window.location.pathname === '/') {
   signInBtn.addEventListener('click', loginFormHandler);
   document.addEventListener('keyup', function (event) {
-    const enterKey = event.key === 'Enter' ? signInBtn.click() : '';
+    return event.key === 'Enter' ? signInBtn.click() : '';
   });
-} else if (window.location.pathname === '/signup') {
   signupBtn.addEventListener('click', signupFormHandler);
   document.addEventListener('keyup', function (event) {
-    const enterKey = event.key === 'Enter' ? signupBtn.click() : '';
+    return event.key === 'Enter' ? signupBtn.click() : '';
   });
+} else if (window.location.pathname !== '/') {
+  logout_btn.addEventListener('click', logoutUser);
 }

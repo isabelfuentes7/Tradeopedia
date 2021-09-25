@@ -17,6 +17,14 @@ User.init(
       primaryKey: true,
       autoIncrement: true,
     },
+    first_name: {
+      type: DataTypes.STRING(30),
+      allowNull: false,
+    },
+    last_name: {
+      type: DataTypes.STRING(30),
+      allowNull: false,
+    },
     username: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -35,6 +43,22 @@ User.init(
       validate: {
         len: [4],
       },
+    },
+    country: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    state: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    city: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    profile_img_url: {
+      type: DataTypes.STRING,
+      defaultValue: 'default.jpg',
     },
   },
   {

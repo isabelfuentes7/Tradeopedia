@@ -16,6 +16,8 @@
   --error-message: #cc0000;
 }
 
+/* BASIC SETUP ----------------------------------------------*/
+
 * {
   margin: 0;
   padding: 0;
@@ -23,12 +25,19 @@
   font-family: 'Poppins', sans-serif;
 }
 
+/* REUSABLE ITEMS -------------------------------------------*/
+
+.hidden {
+  display: none;
+}
+
+/* SIDEBAR --------------------------------------------------*/
 .sidebar {
   position: fixed;
   top: 0;
   left: 0;
   height: 100%;
-  width: 280px;
+  width: 260px;
   background: var(--sidebar-background);
   z-index: 100;
   transition: all 0.5s ease;
@@ -181,10 +190,9 @@
 .sidebar .profile-details {
   position: fixed;
   bottom: 0;
-  width: 280px;
+  width: 260px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
   background: var(--profile-menu-background);
   padding: 12px 0;
   transition: all 0.5s ease;
@@ -227,14 +235,14 @@
   font-size: 14px;
 }
 
-/* MAIN SECTION ------------------------------------------------------------------------- */
+/* MAIN SECTION -------------------------------------------- */
 
 .main-section {
   position: relative;
   background: var(--main-page-background);
   height: 100vh;
-  left: 280px;
-  width: calc(100% - 280px);
+  left: 260px;
+  width: calc(100% - 260px);
   transition: all 0.5s ease;
 }
 .sidebar.close ~ .main-section {
@@ -260,18 +268,32 @@
   font-weight: 600;
 }
 
-/* LOGIN & SIGNUP ------------------------------------------------------------------------- */
-
-.logo-login {
+.nav-link {
   text-align: center;
 }
 
 .signup-check,
-.login-check {
+.login-check,
+.productCreateCheck {
   text-align: center;
   padding-bottom: 1rem;
   font-size: 1.2rem;
   color: var(--error-message);
+}
+
+#sign-up-form,
+#login-form {
+  border-top-left-radius: 0rem;
+  border-top-right-radius: 0rem;
+}
+
+.product_description {
+  /* To preserve white space  */
+  white-space: pre-line;
+}
+
+.modal-header {
+  text-align: center;
 }
 
 /* MEDIA QUERRIES -----------------------------------------------*/

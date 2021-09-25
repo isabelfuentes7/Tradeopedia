@@ -2,6 +2,7 @@ const Category = require('./Category');
 const Product = require('./Product');
 const User = require('./User');
 const Order = require('./Order');
+const Image = require('./Image');
 
 ////////////////////////////////////////////////////////////
 // ASSOCIATIONS: CATEGORY TO PRODUCT
@@ -48,10 +49,23 @@ User.hasMany(Order, {
 });
 
 ////////////////////////////////////////////////////////////
+// ASSOCIATIONS: IMAGE TO PRODUCT
+////////////////////////////////////////////////////////////
+
+Product.hasMany(Image, {
+  foreignKey: 'product_id',
+});
+
+Image.belongsTo(Product, {
+  foreignKey: 'product_id',
+});
+
+////////////////////////////////////////////////////////////
 
 module.exports = {
   Category,
   Product,
   User,
   Order,
+  Image,
 };

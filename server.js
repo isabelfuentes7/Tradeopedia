@@ -1,4 +1,5 @@
 const express = require('express');
+const multer = require('multer');
 const morgan = require('morgan');
 const routes = require('./routes');
 const sequelize = require('./config/connection');
@@ -12,6 +13,10 @@ const hbs = exphbs.create({ helpers });
 const session = require('express-session');
 
 const app = express();
+
+/////////////////////////////////////////////
+// MULTER
+/////////////////////////////////////////////
 
 /////////////////////////////////////////////
 // Morgan Middleware

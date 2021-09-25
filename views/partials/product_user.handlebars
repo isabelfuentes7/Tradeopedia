@@ -1,0 +1,104 @@
+<!-- Gallery -------------------------------------------------------------------->
+<div>
+  <div class='container px-5 py-2'>
+    <div class='row'>
+
+      {{! ---------------------------------------------------------------------------- }}
+      {{! ----------------------------- Column 1 ------------------------------------- }}
+
+      <div class='col-lg-4 col-md-12 mb-4 mb-lg-0'>
+
+        {{#each gallery_1}}
+          <div>
+            <img src='/img/products/{{product_img_url}}' id='img-{{product_id}}' class='w-100 shadow-1-strong rounded mb-4 item-image' alt='Product Image: {{product.product_name}}' />
+          </div>
+
+          <div class='modal fade' id='model-{{product_id}}' tabindex='-1' role='dialog' aria-hidden='true'>
+            <div class='modal-dialog modal-dialog-centered modal-dialog-scrollable'>
+              <div class='modal-content'>
+                <div class='modal-header'>
+                  <h5 class='modal-title text-dark'>{{product.product_name}}</h5>
+                  <button type='button' class='btn-close' aria-label='Close'></button>
+                </div>
+                <div class='modal-body text-dark'>
+                  <p>Price: ${{product.product_price}}</p>
+                  <p>Post Date: {{format_date product.created_at}}</p>
+                  <p>Category: {{product.category_name}}</p>
+                  <p class='product_description'>Description: {{product.product_description}}</p>
+                </div>
+                <div class='modal-footer'>
+                  <a href='/view/user/edit-product/{{product_id}}'><button type='button' name='' class='btn btn-secondary btn-modal'>Edit</button></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+
+      {{! ---------------------------------------------------------------------------- }}
+      {{! ----------------------------- Column 2 ------------------------------------- }}
+
+      <div class='col-lg-4 mb-4 mb-lg-0'>
+        {{#each gallery_2}}
+          <div>
+            <img src='/img/products/{{product_img_url}}' id='img-{{product_id}}' class='w-100 shadow-1-strong rounded mb-4 item-image' alt='Product Image: {{product.product_name}}' />
+          </div>
+
+          <div class='modal fade' id='model-{{product_id}}' tabindex='-1' role='dialog' aria-hidden='true'>
+            <div class='modal-dialog modal-dialog-centered modal-dialog-scrollable'>
+              <div class='modal-content'>
+                <div class='modal-header'>
+                  <h5 class='modal-title text-dark'>{{product.product_name}}</h5>
+                  <button type='button' class='btn-close' aria-label='Close'></button>
+                </div>
+                <div class='modal-body text-dark'>
+                  <p cla>Price: ${{product.product_price}}</p>
+                  <p>Post Date: {{format_date product.created_at}}</p>
+                  <p>Category: {{product.category_name}}</p>
+                  <p class='product_description'>Description: {{product.product_description}}</p>
+                </div>
+                <div class='modal-footer'>
+                  <a href='/view/user/edit-product/{{product_id}}'><button type='button' name='' class='btn btn-secondary btn-modal'>Edit</button></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+
+      {{! ---------------------------------------------------------------------------- }}
+      {{! ----------------------------- Column 3 ------------------------------------- }}
+
+      <div class='col-lg-4 mb-4 mb-lg-0'>
+        {{#each gallery_3}}
+
+          <div>
+            <img src='/img/products/{{product_img_url}}' id='img-{{product_id}}' class='w-100 shadow-1-strong rounded mb-4 item-image' alt='Product Image: {{product.product_name}}' />
+          </div>
+
+          <div class='modal fade' id='model-{{product_id}}' tabindex='-1' role='dialog' aria-hidden='true'>
+            <div class='modal-dialog modal-dialog-centered modal-dialog-scrollable'>
+              <div class='modal-content'>
+                <div class='modal-header'>
+                  <h5 class='modal-title text-dark'>{{product.product_name}}</h5>
+                  <button type='button' class='btn-close' aria-label='Close'></button>
+                </div>
+                <div class='modal-body text-dark'>
+                  <p>Price: ${{product.product_price}}</p>
+                  <p>Post Date: {{format_date product.created_at}}</p>
+                  <p>Category: {{product.category_name}}</p>
+                  <p class='product_description'>Description: {{product.product_description}}</p>
+                </div>
+                <div class='modal-footer'>
+                  <a href='/view/user/edit-product/{{product_id}}'><button type='button' name='' class='btn btn-secondary btn-modal'>Edit</button></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+
+      {{! ---------------------------------------------------------------------------- }}
+    </div>
+  </div>
+</div>

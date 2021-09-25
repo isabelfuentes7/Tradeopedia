@@ -1,0 +1,94 @@
+    <header class="sidebar close">
+      <div>
+        <div class="logo-details">
+          <i class="bx bx-world"></i>
+          <span class="logo_name">Tradeopedia</span>
+        </div>
+      </div>
+      <nav>
+        <ul class="nav-links">
+          <!-- EXPLORE ------------------------------------------------------>
+          {{!-- COMPLETE --}}
+          <li>
+            <a href="/view/user/explore/">
+              <i class="bx bx-home-smile bx-md"></i>
+              <span class="link_name">Explore</span>
+            </a>
+            <ul class="sub-menu blank">
+              <li><a class="link_name" href="/view/user/explore/">Explore</a></li>
+            </ul>
+          </li>
+          <!-- DASHBOARD ------------------------------------------------------>
+          {{!-- COMPLETE --}}
+          <li>
+            <a href="/view/user/dashboard/">
+              <i class="bx bx-news bx-md"></i>
+              <span class="link_name">Dashboard</span>
+            </a>
+            <ul class="sub-menu blank">
+              <li><a class="link_name" href="/view/user/dashboard/">Dashboard</a></li>
+            </ul>
+          </li>
+          <!-- PRODUCTS ------------------------------------------------------>
+          {{!-- COMPLETE --}}
+          <li>
+            <a href="/view/user/products/">
+              <i class="bx bx-briefcase bx-md"></i>
+              <span class="link_name">Products</span>
+            </a>
+            <ul class="sub-menu blank">
+              <li><a class="link_name" href="/view/user/products/">Products</a></li>
+            </ul>
+          </li>
+
+          <!-- CREATE ------------------------------------------------------>
+          {{!-- COMPLETE --}}
+          <li>
+            <a href="/view/user/create/">
+              <i class="bx bx-barcode-reader bx-md"></i>
+              <span class="link_name">Create</span>
+            </a>
+            <ul class="sub-menu blank">
+              <li><a class="link_name" href="/view/user/create/">Create</a></li>
+            </ul>
+          </li>
+
+          <!-- Messages ------------------------------------------------------>
+          {{!-- COMPLETE --}}
+          <li>
+            <a href="/view/user/messages/">
+              <i class="bx bx-message bx-md"></i>
+              <span class="link_name">Messages</span>
+            </a>
+            <ul class="sub-menu blank">
+              <li><a class="link_name" href="/view/user/messages/">Messages</a></li>
+            </ul>
+          </li>
+
+          <!-- Profile Page ------------------------------------------------------>
+          {{!-- COMPLETE --}}
+          <li>
+            <a href="/view/user/profile/">
+              <i class="bx bx-id-card bx-md"></i>
+              <span class="link_name">Profile</span>
+            </a>
+            <ul class="sub-menu blank">
+              <li><a class="link_name" href="/view/user/profile/">Profile</a></li>
+            </ul>
+          </li>
+
+          <!-- PROFILE ------------------------------------------------------>
+          <li>
+            <div class="profile-details">
+              <div class="profile-content">
+                <img src="/img/profile/{{user.profile_img_url}}" alt="profileImg" />
+              </div>
+              <div class="name-welcome">
+                <div class="profile_name">{{user.first_name}}</div>
+                <div class="welcome-msg">Welcome back!</div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </nav>
+    </header>

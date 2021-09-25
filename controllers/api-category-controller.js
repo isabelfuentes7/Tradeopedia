@@ -11,7 +11,7 @@ exports.getAllCategories = catchAsync(async (req, res, next) => {
   const categoriesFindAll = await Category.findAll({
     include: {
       model: Product,
-      attributes: ['id', 'product_name', 'price', 'category_id'],
+      attributes: ['id', 'product_name', 'product_price', 'product_description', 'category_name'],
     },
   });
 
@@ -30,7 +30,7 @@ exports.getOneCategory = catchAsync(async (req, res, next) => {
     where: { id },
     include: {
       model: Product,
-      attributes: ['id', 'product_name', 'price', 'category_id'],
+      attributes: ['id', 'product_name', 'product_price', 'product_description', 'category_name'],
     },
   });
 

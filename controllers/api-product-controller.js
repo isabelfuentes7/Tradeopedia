@@ -1,4 +1,4 @@
-const { Product, Category, User } = require('../models');
+const { Product, Category, User, Image } = require('../models');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 
@@ -10,16 +10,15 @@ const AppError = require('../utils/appError');
 exports.getAllProducts = catchAsync(async (req, res, next) => {
   //   // find all products
   const productsFindAll = await Product.findAll({
-    include: [
-      {
-        model: Category,
-        attributes: ['category_name'],
-      },
-      {
-        model: User,
-        attributes: { exclude: ['password', 'id'] },
-      },
-    ],
+    // include: [
+    //   {
+    //     model: Image,
+    //   },
+    //   {
+    //     model: User,
+    //     attributes: { exclude: ['password', 'id'] },
+    //   },
+    // ],
   });
 
   res.status(200).json(productsFindAll);
@@ -36,8 +35,7 @@ exports.getOneProduct = catchAsync(async (req, res, next) => {
     where: { id },
     include: [
       {
-        model: Category,
-        attributes: ['category_name'],
+        model: Image,
       },
       {
         model: User,
