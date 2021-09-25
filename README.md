@@ -1,6 +1,5 @@
 # Tradeopedia
-## [This can be a Link Header](www.hyperlinkhere.com/) 
-### Some Sub Text
+
 
 ---- 
 
@@ -16,64 +15,38 @@
 
 ## What is this?
 
-This is an example README template I have put together for use in my personal projects here on GitHub.  It only needs a few specifc adjustments to fit any project.  
+Tradeopedia is an online market place that detects your location to find the best pre-owned and hand crafted items near you. On our site you have the facility to contact the seller directly via our Tradeopedia messaging feature. Hassle-free for both the buyer and seller.   
 
 
-----
-
-## Link to the live page
-[Check out the live site](www.website.com)
-![](example-gif.gif)
 
 ----
 
 ## Technologies
-Bcrypyt - hashing function allows us to build a password security platform that scales with computation power 
+* Bcrypyt - hashing function allows us to build a password security platform that scales with computation power 
 
-connect-session-sequelize - is a SQL session store using Sequelize.js
+* connect-session-sequelize - is a SQL session store using Sequelize.js
 
-Dotenv - is a zero-dependency module that loads environment
+* Dotenv - is a zero-dependency module that loads environment
 
-Express - Fast, unopinionated, minimalist web framework for node.
+* Express - Fast, unopinionated, minimalist web framework for node.
 
-Express-Handlebars - is a templating engine similar to the ejs module in node.js
+* Express-Handlebars - is a templating engine similar to the ejs module in node.js
 
-Express- Session - is a Node.js module available through the npm registry
+* Express- Session - is a Node.js module available through the npm registry
 
-Morgan - HTTP request logger middleware for node.js
+* Morgan - HTTP request logger middleware for node.js
 
-Multer -  is a node.js middleware for handling multipart/form-data
+* Multer -  is a node.js middleware for handling multipart/form-data
 
-MySQL2 -  project is a continuation of MySQL-Native. Protocol parser code was rewritten from scratch and api changed to match popular mysqljs/mysql
+* MySQL2 -  project is a continuation of MySQL-Native. Protocol parser code was rewritten from scratch and api changed to match popular mysqljs/mysql
 
-Nodemon - is a tool that helps develop node.js based applications by automatically restarting the node application when file changes in the directory are detected
+* Nodemon - is a tool that helps develop node.js based applications by automatically restarting the node application when file changes in the directory are detected
 
-Sequelize -  is a promise-based Node.js ORM tool for Postgres, MySQL, MariaDB, SQLite and Microsoft SQL Server. It features solid transaction support, relations, eager and lazy loading, read replication and more.
-
-
+* Sequelize -  is a promise-based Node.js ORM tool for Postgres, MySQL, MariaDB, SQLite and Microsoft SQL Server. It features solid transaction support, relations, eager and lazy loading, read replication and more.
 
 
-#### For Example:
-
-* [Bootstrap 4](https://getbootstrap.com/)
-
-    - A framework for building responsive, mobile-first sites.
-
-* [Hover.css](https://ianlunn.github.io/Hover/)
-
-    - A collection of CSS3 powered hover effects to be applied to links, buttons, logos, SVG, featured images and so on. Easily apply to your own elements, modify or just use for inspiration. Available in CSS, Sass, and LESS.
-
-* [Animate.css](https://daneden.github.io/animate.css/)
-
-    - Just add water CSS animations
-
-----
 
 ## Files 
-
-I'm not sure if this section is necessary, as you can see this in the actual repo directory, but I might do more research to see if something like this is more common/useful than not.
-
-
 
 * controllers
     * category-controller.js
@@ -133,35 +106,25 @@ I'm not sure if this section is necessary, as you can see this in the actual rep
 
 ## Functionality
 
-This is where we discuss how to use the software/app/etc.  For example, for our project 'MeDo':
+* Installation required upon npm command. 
+* Once site is loaded, you are to create an account to either become a buyer or seller. Please keep in mind that the location inputted when creating account will be the location of deals near you. 
 
-* Currently, No Installation necessary.  Simply navigate to [the Medo webpage](https://mpaitgt.github.io/Medo-frontend/) to begin using.
-* Google Chrome is our recommended web browser, but your preferred browser will work as well.
-* User can input an artist/movie's name and add them to their respective list
-* A list item will display the following:
-    * The tile of the artist/band
-    * The amount of time that has passed since the item was first added
-    * A like button 
-    * A removed button
-
-
-    
-----
+---
 
 ## Upcomming Changes
 
-Self-explainatory.
+* Optimizing app for the sorting of images
+* Completing messsaging functionality between seller and buyer
+* Re- factoring code even further 
 
-* Add this
-* Add this
-* Add this
-* Add this
 
 ----
 
 ## Contributors
 
-* [@cerpinconsafo](https://github.com/cerpinconsafo)
+* [@mmehr1988](https://github.com/mmehr1988)
+* [@isabelfuentes7] (https://github.com/isabelfuentes7)
+* [@anirbantalukder] (https://github.com/AnirbanTalukder)
 
 
 ----
