@@ -4,19 +4,6 @@ const AppError = require('../utils/appError');
 const helper = require('../utils/helpers');
 
 ////////////////////////////////////////////////////////////
-<<<<<<< Updated upstream
-// GET ONE USER
-////////////////////////////////////////////////////////////
-// The `/api/users/:id` endpoint
-exports.getUserProfile = catchAsync(async (req, res, next) => {
-  const username = req.session.username;
-
-  console.log(req.session);
-  // const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-
-  res.render('dashboard', { loggedIn: true, username: username });
-});
-=======
 // Multer Middleware
 ////////////////////////////////////////////////////////////
 // [1] multerStorage specifies where file should be saved and with what name
@@ -223,4 +210,3 @@ exports.updateUserImage = catchAsync(async(req, res, next) => {
         data: profile_img_url,
     });
 });
->>>>>>> Stashed changes
