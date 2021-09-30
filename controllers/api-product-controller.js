@@ -10,15 +10,15 @@ const AppError = require('../utils/appError');
 exports.getAllProducts = catchAsync(async (req, res, next) => {
   //   // find all products
   const productsFindAll = await Product.findAll({
-    // include: [
-    //   {
-    //     model: Image,
-    //   },
-    //   {
-    //     model: User,
-    //     attributes: { exclude: ['password', 'id'] },
-    //   },
-    // ],
+    include: [
+      {
+        model: Image,
+      },
+      {
+        model: User,
+        attributes: { exclude: ['password', 'id'] },
+      },
+    ],
   });
 
   res.status(200).json(productsFindAll);

@@ -18,7 +18,7 @@ const updateProduct = async (id, product_name, product_price, product_descriptio
   const response = await fetch(`/update/product/:${id}`, options);
 
   if (response.ok) {
-    document.location.replace('/view/user/products/');
+    document.location.replace('/view/user/products');
   } else {
     alert(response.statusText);
   }
@@ -37,7 +37,7 @@ const deleteProduct = async (id) => {
   const response = await fetch(`/update/product/:${id}`, options);
 
   if (response.ok) {
-    document.location.replace('/view/user/products/');
+    document.location.replace('/view/user/products');
   } else {
     alert(response.statusText);
   }

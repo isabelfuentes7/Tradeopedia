@@ -5,43 +5,39 @@ const viewControls = require('./../controllers/view-controller');
 //////////////////////////////////////////////////////////////////////
 // SHOW USER EXPLORE
 //////////////////////////////////////////////////////////////////////
-// The `/view/user/explore/` endpoint
-router.get('/user/explore/', withAuth, viewControls.getUserExplore);
+// The `/view/user/explore` endpoint
+router.get('/user/explore', withAuth, viewControls.getUserExplore);
+// The `/view/user/explore/:name` endpoint
+router.get('/user/explore/:name', withAuth, viewControls.getFilteredProducts);
 
 //////////////////////////////////////////////////////////////////////
 // SHOW USER DASHBOARD
 //////////////////////////////////////////////////////////////////////
-// The `/view/user/dashboard/` endpoint
-router.get('/user/dashboard/', withAuth, viewControls.getUserDashboard);
-
-//////////////////////////////////////////////////////////////////////
-// SHOW USER MESSAGES
-//////////////////////////////////////////////////////////////////////
-// The `/view/user/messages/` endpoint
-router.get('/user/messages/', withAuth, viewControls.getUserMessages);
+// The `/view/user/dashboard` endpoint
+router.get('/user/dashboard', withAuth, viewControls.getUserDashboard);
 
 //////////////////////////////////////////////////////////////////////
 // SHOW USER PROFILE
 //////////////////////////////////////////////////////////////////////
-// The `/view/user/profile/` endpoint
-router.get('/user/profile/', withAuth, viewControls.getUserProfile);
+// The `/view/user/profile` endpoint
+router.get('/user/profile', withAuth, viewControls.getUserProfile);
 
 //////////////////////////////////////////////////////////////////////
 // SHOW PRODUCT FOR SALE PAGE
 //////////////////////////////////////////////////////////////////////
-// The `/view/user/products/` endpoint
-router.get('/user/products/', withAuth, viewControls.getUserProducts);
+// The `/view/user/products` endpoint
+router.get('/user/products', withAuth, viewControls.getUserProducts);
 
 //////////////////////////////////////////////////////////////////////
 // SHOW CREATE PRODUCT PAGE
 //////////////////////////////////////////////////////////////////////
-// The `/view/user/create/` endpoint
-router.get('/user/create/', withAuth, viewControls.getUserCreate);
+// The `/view/user/create` endpoint
+router.get('/user/create', withAuth, viewControls.getUserCreate);
 
 //////////////////////////////////////////////////////////////////////
 // SHOW CREATE PRODUCT EDIT PAGE
 //////////////////////////////////////////////////////////////////////
-// The `/view/user/create/` endpoint
+// The `/view/user/edit-product/:id` endpoint
 router.get('/user/edit-product/:id', withAuth, viewControls.putUserCreate);
 
 module.exports = router;

@@ -1,0 +1,28 @@
+<div>
+  <a data-bs-toggle='modal' href='#login-modal' role='button'>
+    <button id='login-button' class='btn btn-success mt-1'>Login</button>
+  </a>
+
+  <div class='modal fade' id='login-modal' tabindex='-1' role='dialog' aria-hidden='true'>
+    <div class='modal-dialog modal-dialog-centered'>
+      <div class='modal-content'>
+        <div class='modal-header'>
+          <div class='d-flex align-items-center gap-2'>
+            <i class='bx bx-world bx-md'></i>
+            <span class='logo_name fs-3'>Tradeopedia</span>
+          </div>
+          <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+        </div>
+        <!--  LOGIN FORM ------------------- -->
+        <div class='w-100'>
+          <div id='login-form' class='card px-5 py-4 bg-light'>
+            <div class='login-check'></div>
+            <div class='form-input pb-1'><input type='text' id='login-email' class='form-control' placeholder='Email' /></div>
+            <div class='form-input pb-1'><input type='password' id='login-password' class='form-control' placeholder='Password' /></div>
+            <button id='signin-button' class='btn btn-primary mt-2'>Sign in</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

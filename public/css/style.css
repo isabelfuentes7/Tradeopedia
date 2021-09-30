@@ -6,7 +6,10 @@
   --sidebar-background: #11101d;
   --sidebar-sub-menu-background: #1d1b31;
 
-  --main-page-background: #fff;
+  --nav-toggler-back: #1e3163;
+  --nav-toggler-border: rgb(0, 0, 0);
+
+  --main-page-background: #ffffff;
 
   /* Profile Menu Bottom */
   --profile-menu-background: #ffd523;
@@ -14,6 +17,14 @@
 
   /* Login + Signup Error Message */
   --error-message: #cc0000;
+
+  --icon-bx-world: #1e5783;
+  --icon-bx-globe: #91091e;
+  --icon-bxs-paint: #d63384;
+  --icon-bxs-t-shirt: #198754;
+  --icon-bxs-institution: #fd7e14;
+  --icon-bx-loader-circle: #6610f2;
+  --icon-bxs-guitar-amp: #23689b;
 }
 
 /* BASIC SETUP ----------------------------------------------*/
@@ -29,6 +40,54 @@
 
 .hidden {
   display: none;
+}
+
+/* BUTTONS ---------------------------------------- */
+
+.nav-link:active,
+.bx:active,
+.link_name:active {
+  transform: scale(2);
+  transition: 0.4s transform ease-in-out;
+}
+
+.btn:active {
+  transform: scale(1.2);
+  transition: 0.2s transform ease-in-out;
+}
+
+.btn:focus,
+.btn:active {
+  outline: none;
+  box-shadow: none;
+}
+
+/* NAV TOGGLER ITEMS -------------------------------------------*/
+
+.custom-toggler .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+
+.custom-toggler.navbar-toggler {
+  background-color: var(--nav-toggler-back);
+  width: 100%;
+}
+
+.custom-toggler:active,
+.navbar-toggler:active {
+  transform: scale(1.2);
+  transition: 0.2s transform ease-in-out;
+}
+
+.navbar-toggler:focus,
+.navbar-toggler:active,
+.navbar-toggler-icon:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.main-nav-border {
+  border-bottom: 1px solid var(--nav-toggler-border);
 }
 
 /* SIDEBAR --------------------------------------------------*/
@@ -296,7 +355,45 @@
   text-align: center;
 }
 
+/* ICON COLORS -----------------------------------------------*/
+
+.bx-world {
+  color: var(--icon-bx-world);
+}
+
+.bx-globe {
+  color: var(--icon-bx-globe);
+}
+
+.bxs-paint {
+  color: var(--icon-bxs-paint);
+}
+
+.bxs-t-shirt {
+  color: var(--icon-bxs-t-shirt);
+}
+
+.bxs-institution {
+  color: var(--icon-bxs-institution);
+}
+
+.bx-loader-circle {
+  color: var(--icon-bx-loader-circle);
+}
+
+.bxs-guitar-amp {
+  color: var(--icon-bxs-guitar-amp);
+}
+
 /* MEDIA QUERRIES -----------------------------------------------*/
+
+/* Small tablets to big tablets: from 768px to 1023px*/
+@media only screen and (max-width: 1023px) {
+  .main-nav-border {
+    border-bottom: none;
+  }
+}
+
 @media (max-width: 420px) {
   .sidebar.close .nav-links li .sub-menu {
     display: none;

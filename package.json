@@ -1,5 +1,5 @@
 {
-  "name": "tradeopedia",
+  "name": "ubiquitous-waddle",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -10,11 +10,15 @@
     "seed": "node seeds/index.js"
   },
   "repository": {
-    "type": "git"
+    "type": "git",
+    "url": "git+https://github.com/mmehr1988/ubiquitous-waddle.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Mehdi Mehrabani",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mmehr1988/ubiquitous-waddle/issues"
+  },
   "dependencies": {
     "bcrypt": "^5.0.0",
     "connect-session-sequelize": "^7.0.4",

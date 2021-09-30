@@ -1,7 +1,7 @@
-const { User, Product, Order, Category, Image } = require('../models');
+const { User, Product, Category, Image } = require('../models');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
-const helper = require('../utils/helpers');
+const { uniqueArray, uniqueArray2, gallery } = require('../utils/helpers');
 
 ////////////////////////////////////////////////////////////
 // FIND ONE USER
@@ -14,13 +14,17 @@ const getOneUser = (id) => {
     where: { id },
   });
 
+  if (!usersFindOne) {
+    return next(new AppError('No User found with that ID', 404));
+  }
+
   return usersFindOne;
 };
 
 ////////////////////////////////////////////////////////////
 // SHOW USER EXPLORE
 ////////////////////////////////////////////////////////////
-// The `/view/user/explore/` endpoint
+// The `/view/user/explore` endpoint
 exports.getUserExplore = catchAsync(async (req, res, next) => {
   const id = req.session.user_id;
   const usersFindOne = await getOneUser(id);
@@ -40,26 +44,57 @@ exports.getUserExplore = catchAsync(async (req, res, next) => {
     ],
     raw: true,
     nest: true,
+    order: [['id', 'DESC']],
   });
 
-  // const imageJSON = JSON.stringify(imagesFindAll, null, 2);
+  // In the instance the user has multiple photos,
+  // create an array of only the first image for each product id
+  const filteredImageArr = uniqueArray(imagesFindAll, 'product_id');
 
-  // Create a unique array of the first image for each product id
-  const filteredImageArr = helper.uniqueArray(imagesFindAll, 'product_id');
+  // Render userExplore handlebar +
+  // the users info to be used for the side bar bottom section welcome message +
+  // the filtered image array gallery [see helper for explanation]
 
-  // Create separate arrays for each column of the home page
-  const gallery1 = (arr, nth) => arr.filter((e, i) => i % nth === nth - 3);
-  const gallery2 = (arr, nth) => arr.filter((e, i) => i % nth === nth - 2);
-  const gallery3 = (arr, nth) => arr.filter((e, i) => i % nth === nth - 1);
+  res.render('userExplore', { loggedIn: req.session.loggedIn, user: usersFindOne, gallery_1: gallery(filteredImageArr, 3, 3), gallery_2: gallery(filteredImageArr, 3, 2), gallery_3: gallery(filteredImageArr, 3, 1) });
+});
 
-  // render dashboard page and use the user first name for welcome message
-  res.render('userExplore', { loggedIn: true, user: usersFindOne, gallery_1: gallery1(filteredImageArr, 3), gallery_2: gallery2(filteredImageArr, 3), gallery_3: gallery3(filteredImageArr, 3) });
+////////////////////////////////////////////////////////////
+// SHOW USER EXPLORE FILTERED PAGE
+////////////////////////////////////////////////////////////
+// The `/view/user/explore/:name` endpoint
+exports.getFilteredProducts = catchAsync(async (req, res, next) => {
+  const id = req.session.user_id;
+  const category_name = req.params.name;
+
+  const usersFindOne = await getOneUser(id);
+  // // find all products that match categeory name
+  const imagesFindAll = await Image.findAll({
+    include: [
+      {
+        model: Product,
+        where: { category_name },
+      },
+    ],
+    raw: true,
+    nest: true,
+    order: [['id', 'DESC']],
+  });
+
+  // In the instance the user has multiple photos,
+  // create an array of only the first image for each product id
+  const filteredImageArr = uniqueArray(imagesFindAll, 'product_id');
+
+  // Render userExplore handlebar +
+  // the users info to be used for the side bar bottom section welcome message +
+  // the filtered image array gallery [see helper for explanation]
+
+  res.render('userExplore', { loggedIn: req.session.loggedIn, user: usersFindOne, gallery_1: gallery(filteredImageArr, 3, 3), gallery_2: gallery(filteredImageArr, 3, 2), gallery_3: gallery(filteredImageArr, 3, 1) });
 });
 
 ////////////////////////////////////////////////////////////
 // SHOW USER DASHBOARD
 ////////////////////////////////////////////////////////////
-// The `/view/user/dashboard/` endpoint
+// The `/view/user/dashboard` endpoint
 exports.getUserDashboard = catchAsync(async (req, res, next) => {
   const id = req.session.user_id;
   const usersFindOne = await getOneUser(id);
@@ -70,7 +105,7 @@ exports.getUserDashboard = catchAsync(async (req, res, next) => {
 ////////////////////////////////////////////////////////////
 // SHOW USER PRODUCTS FOR SALE TAB
 ////////////////////////////////////////////////////////////
-// The `/view/user/profile/` endpoint
+// The `/view/user/products` endpoint
 exports.getUserProducts = catchAsync(async (req, res, next) => {
   const id = req.session.user_id;
   const usersFindOne = await getOneUser(id);
@@ -87,21 +122,20 @@ exports.getUserProducts = catchAsync(async (req, res, next) => {
     order: [['id', 'DESC']],
   });
 
-  const filteredImageArr = helper.uniqueArray(productFindAll, 'product_id');
+  // In the instance the user has multiple photos,
+  // create an array of only the first image for each product id
+  const filteredImageArr = uniqueArray(productFindAll, 'product_id');
 
-  const gallery1 = (arr, nth) => arr.filter((e, i) => i % nth === nth - 3);
-  const gallery2 = (arr, nth) => arr.filter((e, i) => i % nth === nth - 2);
-  const gallery3 = (arr, nth) => arr.filter((e, i) => i % nth === nth - 1);
-
-  console.log(gallery3(filteredImageArr, 3));
-
-  res.render('userProducts', { loggedIn: true, user: usersFindOne, productFindAll, gallery_1: gallery1(filteredImageArr, 3), gallery_2: gallery2(filteredImageArr, 3), gallery_3: gallery3(filteredImageArr, 3) });
+  // Render userProducts handlebar +
+  // the users info to be used for the side bar bottom section welcome message +
+  // the filtered image array gallery [see helper for explanation]
+  res.render('userProducts', { loggedIn: req.session.loggedIn, user: usersFindOne, gallery_1: gallery(filteredImageArr, 3, 3), gallery_2: gallery(filteredImageArr, 3, 2), gallery_3: gallery(filteredImageArr, 3, 1) });
 });
 
 ////////////////////////////////////////////////////////////
 // SHOW USER CREATE PRODUCTS PAGE
 ////////////////////////////////////////////////////////////
-// The `/view/user/create/` endpoint
+// The `/view/user/create` endpoint
 exports.getUserCreate = catchAsync(async (req, res, next) => {
   const id = req.session.user_id;
   const usersFindOne = await getOneUser(id);
@@ -111,36 +145,24 @@ exports.getUserCreate = catchAsync(async (req, res, next) => {
     attributes: { exclude: ['id'] },
   });
 
-  res.render('userCreate', { loggedIn: true, user: usersFindOne, category: categoriesFindAll });
-});
-
-////////////////////////////////////////////////////////////
-// SHOW USER MESSAGES TAB
-////////////////////////////////////////////////////////////
-// The `/view/user/messages/` endpoint
-exports.getUserMessages = catchAsync(async (req, res, next) => {
-  const id = req.session.user_id;
-  const usersFindOne = await getOneUser(id);
-
-  res.render('userMessages', { loggedIn: true, user: usersFindOne });
+  res.render('userCreate', { loggedIn: req.session.loggedIn, user: usersFindOne, category: categoriesFindAll });
 });
 
 ////////////////////////////////////////////////////////////
 // SHOW USER PROFILE TAB
 ////////////////////////////////////////////////////////////
-// The `/view/user/messages/` endpoint
+// The `/view/user/profile` endpoint
 exports.getUserProfile = catchAsync(async (req, res, next) => {
   const id = req.session.user_id;
   const usersFindOne = await getOneUser(id);
 
-  res.render('userProfile', { loggedIn: true, user: usersFindOne });
+  res.render('userProfile', { loggedIn: req.session.loggedIn, user: usersFindOne });
 });
 
 ////////////////////////////////////////////////////////////
 // SHOW USER PRODUCT EDIT PAGE
 ////////////////////////////////////////////////////////////
-
-// The `/view/user/messages/` endpoint
+// The `/view/user/edit-product/:id` endpoint
 exports.putUserCreate = catchAsync(async (req, res, next) => {
   const user_id = req.session.user_id;
   const product_id = req.params.id;
@@ -157,6 +179,5 @@ exports.putUserCreate = catchAsync(async (req, res, next) => {
     attributes: { exclude: ['id'] },
   });
 
-  res.render('userEditProduct', { loggedIn: true, user: usersFindOne, product, category: categoriesFindAll });
-  // res.render('userEditProduct', { loggedIn: true });
+  res.render('userEditProduct', { loggedIn: req.session.loggedIn, user: usersFindOne, product, category: categoriesFindAll });
 });

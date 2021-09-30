@@ -1,4 +1,4 @@
-const { User, Product, Order } = require('../models');
+const { User, Product } = require('../models');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 
@@ -14,19 +14,10 @@ exports.getOneUsers = catchAsync(async (req, res, next) => {
     include: [
       {
         model: Product,
-      },
-      {
-        model: Order,
-        attributes: { exclude: ['buyer_id', ''] },
         include: [
           {
-            model: Product,
-            include: [
-              {
-                model: User,
-                attributes: { exclude: ['password'] },
-              },
-            ],
+            model: User,
+            attributes: { exclude: ['password'] },
           },
         ],
       },

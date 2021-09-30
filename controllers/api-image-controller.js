@@ -42,20 +42,20 @@ exports.uploadProductPhotos = upload.array('product_img_url', 3);
 // GET ALL IMAGES
 ////////////////////////////////////////////////////////////
 
-// The `/api/orders` endpoint
+// The `/api/images` endpoint
 exports.getAllImages = catchAsync(async (req, res, next) => {
   const imageFindAll = await Image.findAll({
-    // include: [
-    //   {
-    //     model: Product,
-    //     include: [
-    //       {
-    //         model: User,
-    //         attributes: { exclude: ['password'] },
-    //       },
-    //     ],
-    //   },
-    // ],
+    include: [
+      {
+        model: Product,
+        include: [
+          {
+            model: User,
+            attributes: { exclude: ['password'] },
+          },
+        ],
+      },
+    ],
     raw: true,
     nest: true,
   });

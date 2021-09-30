@@ -1,0 +1,56 @@
+<div>
+
+  <a data-bs-toggle='modal' href='#signup-modal' role='button'>
+    <button id='build-store-button' class='btn btn-warning mt-1'>Sign up</button>
+  </a>
+
+  <div class='modal fade' id='signup-modal' tabindex='-1' role='dialog' aria-hidden='true'>
+    <div class='modal-dialog modal-dialog-centered'>
+      <div class='modal-content'>
+        <div class='modal-header'>
+          <div class='d-flex align-items-center gap-2'>
+            <i class='bx bx-world bx-md'></i>
+            <span class='logo_name fs-3'>Tradeopedia</span>
+          </div>
+          <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+        </div>
+
+        <div class='w-100'>
+          <div id='sign-up-form' class='card px-5 py-4 bg-light'>
+            <div class='signup-check'></div>
+            <div class='form-input pb-1'><input type='text' id='signup-first-name' class='form-control' placeholder='First name' /></div>
+            <div class='form-input pb-1'><input type='text' id='signup-last-name' class='form-control' placeholder='Last name' /></div>
+            <div class='form-input pb-1'><input type='text' id='signup-username' class='form-control' placeholder='Username' /></div>
+            <div class='form-input pb-1'><input type='text' id='signup-email' class='form-control' placeholder='Email' /></div>
+            <div class='form-input pb-1'><input type='password' id='signup-password' class='form-control' placeholder='Password' /></div>
+
+            <!-- SIGNUP COUNTRY -->
+            <div class='pb-1'>
+              <select class='form-select' id='signup_country' required>
+                <option value=''>Country</option>
+                <option>United States</option>
+              </select>
+            </div>
+            <!-- SIGNUP STATE -->
+            <div class='pb-1'>
+              <select class='form-select' id='signup_state' required>
+                <option value=''>State</option>
+                <option>NY</option>
+              </select>
+            </div>
+
+            <!-- SIGNUP CITY -->
+            <div class='pb-1'>
+              <select class='form-select' id='signup_city' required>
+                <option value=''>City</option>
+                <option>New York</option>
+              </select>
+            </div>
+
+            <button id='signup-button' class='btn btn-primary mt-2'>Sign up</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
