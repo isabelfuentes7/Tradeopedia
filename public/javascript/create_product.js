@@ -32,7 +32,7 @@ const createProduct = async (product_name, product_price, product_description, c
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ product_name, product_price, product_description, category_name }),
   };
-  const response = await fetch('/create/product/', options);
+  const response = await fetch('/create/product', options);
 
   if (response.ok) {
     return await response.json();
@@ -51,11 +51,11 @@ const uploadProductImg = async (form) => {
     body: form,
   };
 
-  const response = await fetch('/create/product-image/', options);
+  const response = await fetch('/create/product-image', options);
 
   if (response.ok) {
     // [6] ONCE PRODUCT IMAGE SUCCESSFULLY SAVED
-    document.location.replace('/view/user/products/');
+    document.location.replace('/view/user/products');
   } else if (!response.ok) {
     console.log(await response.json());
   }
@@ -65,7 +65,7 @@ const uploadProductImg = async (form) => {
 // FORM HANDLER
 /////////////////////////////////////////////////////////////////
 
-if (window.location.pathname === '/view/user/create/') {
+if (window.location.pathname === '/view/user/create') {
   product_img_url.addEventListener('change', function (event) {
     event.preventDefault();
     const form = new FormData();

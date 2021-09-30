@@ -1,4 +1,4 @@
-const { User, Product, Order, Category, Image } = require('../models');
+const { User, Product, Category, Image } = require('../models');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 const helper = require('../utils/helpers');
@@ -15,7 +15,7 @@ exports.createOneProduct = catchAsync(async (req, res, next) => {
   const categoriesFindAll = await Category.findAll({
     where: { category_name },
     raw: true,
-    nested: true,
+    nest: true,
   });
 
   const category_id = categoriesFindAll[0].id;

@@ -1,13 +1,12 @@
 const { Product, Category, User, Image } = require('../models');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
-const helper = require('../utils/helpers');
+const { uniqueArray, gallery } = require('../utils/helpers');
 
 ////////////////////////////////////////////////////////////
 // GET ALL USERS
 ////////////////////////////////////////////////////////////
-
-// The `/api/users` endpoint
+// The `/users/all` endpoint
 exports.getAllUsers = catchAsync(async (req, res, next) => {
   const usersFindAll = await User.findAll({
     attributes: { exclude: ['password'] },
@@ -19,7 +18,7 @@ exports.getAllUsers = catchAsync(async (req, res, next) => {
 ////////////////////////////////////////////////////////////
 // CREATE USER
 ////////////////////////////////////////////////////////////
-// The `/api/users/` endpoint
+// The `/users/create/` endpoint
 exports.createOneUser = catchAsync(async (req, res, next) => {
   const createOneUser = await User.create(req.body);
 
@@ -35,7 +34,7 @@ exports.createOneUser = catchAsync(async (req, res, next) => {
 ////////////////////////////////////////////////////////////
 // LOGIN USER
 ////////////////////////////////////////////////////////////
-// The `/api/users/login` endpoint
+// The `/users/login` endpoint
 exports.loginUser = catchAsync(async (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
@@ -64,7 +63,7 @@ exports.loginUser = catchAsync(async (req, res, next) => {
 ////////////////////////////////////////////////////////////
 // LOGOUT USER
 ////////////////////////////////////////////////////////////
-// The `/api/users/logout` endpoint
+// The `/users/logout` endpoint
 exports.logoutUser = catchAsync(async (req, res, next) => {
   if (req.session.loggedIn) {
     req.session.destroy(() => {
@@ -78,8 +77,7 @@ exports.logoutUser = catchAsync(async (req, res, next) => {
 ////////////////////////////////////////////////////////////
 // GET ALL PRODUCTS
 ////////////////////////////////////////////////////////////
-
-// The `/api/products` endpoint
+// The `/` endpoint
 exports.getAllProducts = catchAsync(async (req, res, next) => {
   // find all products
   const imagesFindAll = await Image.findAll({
@@ -95,41 +93,50 @@ exports.getAllProducts = catchAsync(async (req, res, next) => {
         ],
       },
     ],
+    raw: true,
+    nest: true,
+    order: [['id', 'DESC']],
   });
 
-  // Create a unique array of the first image for each product id
-  const filteredImageArr = helper.uniqueArray(imagesFindAll, 'product_id');
+  // In the instance the user has multiple photos,
+  // create an array of only the first image for each product id
+  const filteredImageArr = uniqueArray(imagesFindAll, 'product_id');
 
-  // Create separate arrays for each column of the home page
-  const gallery1 = (arr, nth) => arr.filter((e, i) => i % nth === nth - 3);
-  const gallery2 = (arr, nth) => arr.filter((e, i) => i % nth === nth - 2);
-  const gallery3 = (arr, nth) => arr.filter((e, i) => i % nth === nth - 1);
+  // Render homepage handlebar +
+  // loggedIn: req.session.loggedIn >>>>> checks whether session is a logged in user
+  // the filtered image array gallery [see folder utils/helper = gallery for explanation]
 
-  // render the home page
-  res.render('homepage', { loggedIn: req.session.loggedIn, gallery_1: gallery1(filteredImageArr, 3), gallery_2: gallery2(filteredImageArr, 3), gallery_3: gallery3(filteredImageArr, 3) });
+  res.render('homepage', { loggedIn: req.session.loggedIn, gallery_1: gallery(filteredImageArr, 3, 3), gallery_2: gallery(filteredImageArr, 3, 2), gallery_3: gallery(filteredImageArr, 3, 1) });
 });
 
 ////////////////////////////////////////////////////////////
-// GO TO LOGIN PAGE
-////////////////////////////////////////////////////////////
-exports.loginPage = catchAsync(async (req, res, next) => {
-  if (req.session.loggedIn) {
-    res.redirect('/');
-    return;
-  }
-
-  res.render('login');
-});
-
-////////////////////////////////////////////////////////////
-// GO TO SIGNUP PAGE
+// GET FILTERED PRODUCTS
 ////////////////////////////////////////////////////////////
 
-exports.signUpPage = catchAsync(async (req, res, next) => {
-  if (req.session.loggedIn) {
-    res.redirect('/');
-    return;
-  }
+// The `/:name` endpoint
+exports.getFilteredProducts = catchAsync(async (req, res, next) => {
+  const category_name = req.params.name;
 
-  res.render('signup');
+  // find all products where category_id
+  const imagesFindAll = await Image.findAll({
+    raw: true,
+    include: [
+      {
+        model: Product,
+        where: { category_name },
+      },
+    ],
+    raw: true,
+    nest: true,
+    order: [['id', 'DESC']],
+  });
+
+  // In the instance the user has multiple photos,
+  // create an array of only the first image for each product id
+  const filteredImageArr = uniqueArray(imagesFindAll, 'product_id');
+
+  // Render homepage_filtered handlebar +
+  // loggedIn: req.session.loggedIn >>>>> checks whether session is a logged in user
+  // the filtered image array gallery [see folder utils/helper = gallery for explanation]
+  res.render('homepage_filtered', { loggedIn: req.session.loggedIn, gallery_1: gallery(filteredImageArr, 3, 3), gallery_2: gallery(filteredImageArr, 3, 2), gallery_3: gallery(filteredImageArr, 3, 1) });
 });

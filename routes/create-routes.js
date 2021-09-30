@@ -9,9 +9,9 @@ const multerImporter = require('../utils/multerImporter');
 //////////////////////////////////////////////////////////////////////
 
 // [1] Create product
-router.post('/product/', withAuth, createControls.createOneProduct);
+router.post('/product', withAuth, createControls.createOneProduct);
 
 // [2] Upload Product images
-router.post('/product-image/', withAuth, multerImporter.uploadProductPhotos, createControls.createProductImage);
+router.post('/product-image', withAuth, multerImporter.uploadProductPhotos, createControls.createProductImage);
 
 module.exports = router;

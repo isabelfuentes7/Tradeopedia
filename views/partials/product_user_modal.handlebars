@@ -1,0 +1,23 @@
+<a class='gallery-img' data-bs-toggle='modal' href='#product-{{img_substring product_img_url}}' role='button'>
+  <img src='/img/products/{{product_img_url}}' class='w-100 shadow-1-strong rounded mb-4 item-image' alt='Product Image: {{product.product_name}}' />
+</a>
+
+<div class='modal fade' id='product-{{img_substring product_img_url}}' tabindex='-1' role='dialog' aria-hidden='true'>
+  <div class='modal-dialog modal-dialog-centered modal-dialog-scrollable'>
+    <div class='modal-content'>
+      <div class='modal-header'>
+        <h5 class='modal-title text-dark'>{{product.product_name}}</h5>
+        <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+      </div>
+      <div class='modal-body text-dark'>
+        <p> <span class='fw-bold'>Price:</span> ${{product.product_price}}</p>
+        <p> <span class='fw-bold'>Post Date:</span> {{format_date product.created_at}}</p>
+        <p> <span class='fw-bold'>Category:</span> {{product.category_name}}</p>
+        <p class='product_description'><span class='fw-bold'>Description:</span> {{product.product_description}}</p>
+      </div>
+      <div class='modal-footer'>
+        <a href='/view/user/edit-product/{{product_id}}'><button type='button' name='' class='btn btn-secondary btn-modal'>Edit</button></a>
+      </div>
+    </div>
+  </div>
+</div>

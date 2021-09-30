@@ -14,7 +14,7 @@ const login_btn = document.querySelector('#login-button');
 const signInBtn = document.querySelector('#signin-button');
 const userLoginCheck = document.querySelector('.login-check');
 
-// Logout
+// // Logout
 const logout_btn = document.querySelector('#logout-button');
 
 /////////////////////////////////////////////////////////////////
@@ -49,7 +49,7 @@ const getAllUsers = async () => {
     method: 'GET',
     headers: { 'Content-Type': 'application/json' },
   };
-  const response = await fetch('/home/users/all/', options);
+  const response = await fetch('/home/users/all', options);
   const data = await response.json();
   return data;
 };
@@ -63,7 +63,7 @@ const createUser = async (first_name, last_name, username, email, password, coun
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ first_name, last_name, username, email, password, country, state, city }),
   };
-  const response = await fetch('/home/users/create/', options);
+  const response = await fetch('/home/users/create', options);
 
   if (response.ok) {
     loginUser(email, password);
@@ -81,10 +81,10 @@ const loginUser = async (email, password, username) => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email, password }),
   };
-  const response = await fetch('/home/users/login/', options);
+  const response = await fetch('/home/users/login', options);
 
   if (response.ok) {
-    document.location.replace('/view/user/dashboard/');
+    document.location.replace('/view/user/explore');
   } else {
     showMessage('login', 'Password Incorrect');
   }
@@ -96,17 +96,18 @@ const loginUser = async (email, password, username) => {
 
 const logoutUser = async (event) => {
   event.preventDefault();
+
   const options = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
   };
 
-  const response = await fetch('/home/users/logout/', options);
+  const response = await fetch('/home/users/logout', options);
 
   if (response.ok) {
     document.location.replace('/');
   } else {
-    alert(response.statusText);
+    alert('Failed to log out.');
   }
 };
 
@@ -177,7 +178,7 @@ const loginFormHandler = async (event) => {
 // EVENT LISTENERS
 /////////////////////////////////////////////////////////////////
 
-if (window.location.pathname === '/') {
+if (window.location.pathname === '/' || window.location.pathname.includes('/home/')) {
   signInBtn.addEventListener('click', loginFormHandler);
   document.addEventListener('keyup', function (event) {
     return event.key === 'Enter' ? signInBtn.click() : '';

@@ -1,0 +1,58 @@
+<a data-bs-toggle='modal' href='#gallery-{{img_substring product_img_url}}' role='button'>
+  <img src='/img/products/{{product_img_url}}' class='w-100 shadow-1-strong rounded mb-4 item-image' alt='Product Image: {{product.product_name}}' />
+</a>
+
+<div class='modal fade' id='gallery-{{img_substring product_img_url}}' aria-hidden='true' aria-labelledby='gallery-{{img_substring product_img_url}}' tabindex='-1'>
+  <div class='modal-dialog modal-dialog-centered modal-dialog-scrollable'>
+    <div class='modal-content'>
+      <div class='modal-header'>
+        <div class='d-flex align-items-center gap-2'>
+          <i class='bx bx-world bx-md'></i>
+          <span class='logo_name fs-3'>Tradeopedia</span>
+        </div>
+        <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+      </div>
+      <div class='modal-body text-dark'>
+        <p> <span class='fw-bold'>Product Name:</span> {{product.product_name}}</p>
+        <p> <span class='fw-bold'>Price:</span> ${{product.product_price}}</p>
+        <p> <span class='fw-bold'>Post Date:</span> {{format_date product.created_at}}</p>
+        <p> <span class='fw-bold'>Category:</span> {{product.category_name}}</p>
+        <p class='product_description'><span class='fw-bold'>Description:</span> {{product.product_description}}</p>
+      </div>
+
+      <div class='modal-footer'>
+        {{#if loggedIn}}
+          <button class='btn btn-primary btn-modal' data-id='{{product_id}}' data-bs-target='#' data-bs-toggle='modal' data-bs-dismiss='modal'>Message Seller</button>
+        {{else}}
+          <button class='btn btn-primary btn-modal' data-bs-target='#signup_or_login' data-bs-toggle='modal' data-bs-dismiss='modal'>Message Seller</button>
+        {{/if}}
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{{! MODAL FOR WHEN USER IS NOT LOGGED IN AND THEY CLICK TO SEND MESSAGE TO SELLER }}
+
+<div class='modal fade' id='signup_or_login' aria-hidden='true' aria-labelledby='signup_or_login' tabindex='-1'>
+  <div class='modal-dialog modal-dialog-centered'>
+    <div class='modal-content'>
+      <div class='modal-header'>
+        <div class='d-flex align-items-center gap-2'>
+          <i class='bx bx-world bx-md'></i>
+          <span class='logo_name fs-3'>Tradeopedia</span>
+        </div>
+        <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+      </div>
+      <div class='modal-body'>
+
+        <h5 id='signup_or_loginLabel'>Please <span class='text-danger'>sign up</span> or <span class='text-danger'>login</span> to message seller.</h5>
+
+      </div>
+      <div class='modal-footer'>
+        <button class='btn btn-warning' data-bs-target='#signup-modal' data-bs-toggle='modal' data-bs-dismiss='modal'>Sign up</button>
+        <button class='btn btn-success' data-bs-target='#login-modal' data-bs-toggle='modal' data-bs-dismiss='modal'>Login</button>
+      </div>
+    </div>
+  </div>
+</div>

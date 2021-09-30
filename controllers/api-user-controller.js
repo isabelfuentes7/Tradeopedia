@@ -1,4 +1,4 @@
-const { User, Product, Order, Image } = require('../models');
+const { User, Product, Image } = require('../models');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 
@@ -26,11 +26,6 @@ exports.getOneUsers = catchAsync(async (req, res, next) => {
     include: [
       {
         model: Product,
-        include: [
-          {
-            model: Image,
-          },
-        ],
       },
     ],
   });

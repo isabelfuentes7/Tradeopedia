@@ -1,7 +1,6 @@
 const Category = require('./Category');
 const Product = require('./Product');
 const User = require('./User');
-const Order = require('./Order');
 const Image = require('./Image');
 
 ////////////////////////////////////////////////////////////
@@ -33,22 +32,6 @@ Product.belongsTo(User, {
 });
 
 ////////////////////////////////////////////////////////////
-// ASSOCIATIONS: USER TO PRODUCT TO ORDER
-////////////////////////////////////////////////////////////
-
-Product.hasOne(Order, {
-  foreignKey: 'product_id',
-});
-
-Order.belongsTo(Product, {
-  foreignKey: 'product_id',
-});
-
-User.hasMany(Order, {
-  foreignKey: 'buyer_id',
-});
-
-////////////////////////////////////////////////////////////
 // ASSOCIATIONS: IMAGE TO PRODUCT
 ////////////////////////////////////////////////////////////
 
@@ -66,6 +49,5 @@ module.exports = {
   Category,
   Product,
   User,
-  Order,
   Image,
 };
