@@ -1,164 +1,157 @@
-Tradeopedia
+## Project 2: Tradeopedia
 
-## [This can be a Link Header](www.hyperlinkhere.com/)
+<a href="https://choosealicense.com/licenses/mit" target="_blank"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" /></a>
 
-### Some Sub Text
+## Table of Contents:
 
----
+1. [Description](#description)
+1. [Technologies](#technologies)
+1. [Multer](#multer)
+1. [Installation](#installation)
+1. [Usage](#usage)
+1. [Video](#video)
+1. [Contributing](#contributing)
+1. [License](#license)
+1. [Questions](#questions)
 
-## Table of contents
+## Description
 
-- [What is this?](#what-is-this)
-- [Technologies](#technologies)
-- [Files Included](#files-included)
-- [Functionality](#functionality)
-- [Upcomming Changes](#upcomming-changes)
-- [Contributors](#contributors)
+Tradeopedia is an e-commerce market place website that connects sellers and buyers within their city location. In the past few years, people have developed new skills as a result of work from home due to covid, and these skills have increased the demand for online storefronts. As a result, we wanted to create an e-commerce marketplace for the "everyday artist".
 
----
-
-## What is this?
-
-This is an example README template I have put together for use in my personal projects here on GitHub. It only needs a few specifc adjustments to fit any project.
-
----
-
-## Link to the live page
-
-[Check out the live site](www.website.com)
-![](example-gif.gif)
-
----
+To view the final app deployed on Heroku, please click on the following [link](https://dry-hamlet-80029.herokuapp.com/).
 
 ## Technologies
 
-Bcrypyt - hashing function allows us to build a password security platform that scales with computation power
+1. [Node.js](https://www.npmjs.com/package/inquirer) Packages
 
-connect-session-sequelize - is a SQL session store using Sequelize.js
+   a. [bcrypt](https://www.npmjs.com/package/bcrypt)
 
-Dotenv - is a zero-dependency module that loads environment
+   b. [connection-session-sequelize](https://www.npmjs.com/package/connect-session-sequelize)
 
-Express - Fast, unopinionated, minimalist web framework for node.
+   c. [dotenv](https://www.npmjs.com/package/dotenv)
 
-Express-Handlebars - is a templating engine similar to the ejs module in node.js
+   d. [express](https://www.npmjs.com/package/express)
 
-Express- Session - is a Node.js module available through the npm registry
+   e. [express-handlebars](https://www.npmjs.com/package/express-handlebars)
 
-Morgan - HTTP request logger middleware for node.js
+   f. [express-session](https://www.npmjs.com/package/express-session)
 
-Multer - is a node.js middleware for handling multipart/form-data
+   g. [morgan](https://www.npmjs.com/package/morgan)
 
-MySQL2 - project is a continuation of MySQL-Native. Protocol parser code was rewritten from scratch and api changed to match popular mysqljs/mysql
+   h. [multer](https://www.npmjs.com/package/multer)
 
-Nodemon - is a tool that helps develop node.js based applications by automatically restarting the node application when file changes in the directory are detected
+   i. [mysql2](https://www.npmjs.com/package/mysql2)
 
-Sequelize - is a promise-based Node.js ORM tool for Postgres, MySQL, MariaDB, SQLite and Microsoft SQL Server. It features solid transaction support, relations, eager and lazy loading, read replication and more.
+   j. [nodemon](https://www.npmjs.com/package/nodemon)
 
-#### For Example:
+   k. [sequelize](https://www.npmjs.com/package/sequelize)
 
-- [Bootstrap 4](https://getbootstrap.com/)
+2. CSS Framework
 
-  - A framework for building responsive, mobile-first sites.
+   a. [Bootstrap](https://getbootstrap.com/docs/5.1/getting-started/introduction/)
 
-- [Hover.css](https://ianlunn.github.io/Hover/)
+   b. [Boxicons](https://boxicons.com/)
 
-  - A collection of CSS3 powered hover effects to be applied to links, buttons, logos, SVG, featured images and so on. Easily apply to your own elements, modify or just use for inspiration. Available in CSS, Sass, and LESS.
+3. Deployment
 
-- [Animate.css](https://daneden.github.io/animate.css/)
+   a. [Heroku](https://devcenter.heroku.com/)
 
-  - Just add water CSS animations
+## Multer
 
----
+One of the requirements for this project was to work with a technology that we had not worked with previously. For this reason, we decided to highlight the use of the Multer npm package. See below for description per multer documentation.
 
-## Files
+> "Multer is a node.js middleware for handling multipart/form-data, which is primarily used for uploading files."
 
-I'm not sure if this section is necessary, as you can see this in the actual repo directory, but I might do more research to see if something like this is more common/useful than not.
+If you want to review the documentation page check out the following [link](https://www.npmjs.com/package/multer)
 
-- controllers
-  - category-controller.js
-  - dashboard-controller.js
-  - errorController.js
-  - home-controller.js
-  - order-controller.js
-  - product-controller.js
-  - user-controller.js
-- db
-  - schema.sql
-- models
-  - Category.js
-  - index.js
-  - Order.js
-  - Product.js
-  - User.js
-- public
-  - css
-  - img
-  - javascript
-- routes - API
-  - category-routes.js
-  - index.js
-  - order- routes.js
-  - product- routes.js
-  - user- routes.js
-  - dashboard- routes.js
-  - home- routes.js
-  - index.js
-- seeds
+### Multer vs. Tradeopedia
 
-  - category-seeds.js
-  - image- seeds.js
-  - index.js
-  - order- seeds.js
-  - product- seeds.js
-  - user- seeds.js
+During the initial phases of putting this project together, we realized quickly that the process of uploading of images to the server will be a one of the more difficult tasks. After some research, we decided to choose a technology that would make the handling of image file uploads easier.
 
-- utils
+## Installation
 
-  - appError.js
-  - auth.js
-  - catchAsync.js
-  - helpers.js
+- Before cloning the repository, please ensure you have node.js installed as this app requires the installing of npm packages. If you do not have node.js installed, start with steps 1 and 2. If you have node.js installed and confirmed, you can skip steps 1 and 2 and begin on step 3.
 
-- views - layouts
-  - footer.handlebars
-  - index.html
-  - main.handlebars
-  - navbar.handlebars
-  - dashboard.handlebars
-  - homepage.handlebars
-  - login.handlebars
-  - signup.handlebars
+  1.  [Node.js Download Page](https://nodejs.org/en/download/)
 
----
+  2.  After install, check with command line to ensure setup is correct.
 
-## Functionality
+      a. Open your terminal
 
-This is where we discuss how to use the software/app/etc. For example, for our project 'MeDo':
+      b. Type the below command. If you see a version it means you have installed node.js correctly.
 
-- Currently, No Installation necessary. Simply navigate to [the Medo webpage](https://mpaitgt.github.io/Medo-frontend/) to begin using.
-- Google Chrome is our recommended web browser, but your preferred browser will work as well.
-- User can input an artist/movie's name and add them to their respective list
-- A list item will display the following:
-  - The tile of the artist/band
-  - The amount of time that has passed since the item was first added
-  - A like button
-  - A removed button
+      ```bash
+      node -v
+      ```
 
----
+  3.  Clone repository and open in VS Code.
 
-## Upcomming Changes
+  4.  Open Terminal in VS Code
 
-Self-explainatory.
+      a. Shortcut = CTRL + `
 
-- Add this
-- Add this
-- Add this
-- Add this
+  5.  Install all the dependencies by typing the below command.
 
----
+      ```bash
+      npm install
+      ```
 
-## Contributors
+  6.  Once you hit enter, the correct dependencies for allowing you to use this application will be automatically installed.
 
-- [@cerpinconsafo](https://github.com/cerpinconsafo)
+  7.  The final step is to update the .env.EXAMPLE file with your MySQL password and user info. Please ensure you also remove the ".EXAMPLE" from the file path.
 
----
+  ## Usage
+
+- Once you've completed the installation section guidelines, you'll need to first create the database in MySQL before running the application. Follow the below steps and use the image at the end of this section for guidance.
+
+  1.  Open Terminal in VS Code
+
+      a. Shortcut = CTRL + `
+
+  2.  Navigate to the folder called 'db'.
+
+  3.  Log into your MySQL and type the below command.
+
+      ```bash
+      source schema.sql
+      ```
+
+  4.  When you've received confirmation that the database has been created, exit MySQL so that you can run the application. Type the below command to exit MySQL.
+
+      ```bash
+      quit
+      ```
+
+  - If you would like to use the example tech blog database, I've placed a json file in the seeds folder and you can save the data to MySQL by running the below command. If not, go to step 5.
+
+    ```bash
+      npm run seeds
+    ```
+
+  5.  To run the application, you'll need to navigate back to the main folder where the file `server.js` is saved and type the below command.
+
+      ```bash
+      node server.js
+      ```
+
+### Steps To Create Database In MySQL
+
+![alt text](./readme_assets/img/mysql-database-creation.png)
+
+## Video
+
+![alt text](./readme_assets/gif/tradeopedia.gif)
+
+## Contributing
+
+Please open a Github issues request and we’ll review and respond as soon as I can.
+
+## License
+
+<a href="https://choosealicense.com/licenses/mit" target="_blank">MIT License</a>
+
+## Questions
+
+Github Portfolio Link: [Mehdi Mehrabani](https://github.com/mmehr1988)<br>
+Github Portfolio Link: [Anirban Talukder](https://github.com/AnirbanTalukder)<br>
+Github Portfolio Link: [Isabel Fuentes](https://github.com/IsabelFuentes7)<br>
